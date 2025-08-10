@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainStyleSheet.uss?fileID=7433441132597879392&amp;guid=eb97ef6a837eb6f469980fd06f1838d2&amp;type=3#MainStyleSheet" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:DropdownField label="Режим" choices="Просмотр,Атлас,КТ,МРТ" index="0" name="DropdownField-Mode" />
+        <ui:VisualElement name="Atlas" style="flex-grow: 1; display: none;">
+            <ui:Toggle label="Кожа" name="ToggleSkin" />
+            <ui:Toggle label="Кости" name="ToggleBones" />
+            <ui:Toggle label="Артерии" name="ToggleArteries" />
+            <ui:Toggle label="Вены" name="ToggleVeins" />
+            <ui:Toggle label="Трахея" name="ToggleThrachea" />
+            <ui:Toggle label="Лимфатические узлы" name="ToggleLymphNodes" />
+            <ui:Toggle label="Щитовидная железа" name="ToggleThyroidGland" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ComputedTomography" style="flex-grow: 1;" />
+        <ui:VisualElement name="MagneticResonanceImaging" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
