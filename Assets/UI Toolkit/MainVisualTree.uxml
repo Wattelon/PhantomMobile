@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyleSheet.uss?fileID=7433441132597879392&amp;guid=eb97ef6a837eb6f469980fd06f1838d2&amp;type=3#MainStyleSheet" />
-    <ui:VisualElement style="flex-grow: 1;">
+    <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
         <ui:DropdownField label="Режим" choices="Просмотр,Атлас,КТ,МРТ" index="0" name="DropdownField-Mode" />
-        <ui:VisualElement name="Atlas" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="Atlas" class="mode-container" style="display: none; flex-direction: column;">
             <ui:Toggle label="Кожа" name="ToggleSkin" />
             <ui:Toggle label="Кости" name="ToggleBones" />
             <ui:Toggle label="Артерии" name="ToggleArteries" />
@@ -11,7 +11,17 @@
             <ui:Toggle label="Лимфатические узлы" name="ToggleLymphNodes" />
             <ui:Toggle label="Щитовидная железа" name="ToggleThyroidGland" />
         </ui:VisualElement>
-        <ui:VisualElement name="ComputedTomography" style="flex-grow: 1;" />
-        <ui:VisualElement name="MagneticResonanceImaging" style="flex-grow: 1;" />
+        <ui:VisualElement name="ComputedTomography" class="mode-container" style="display: none; flex-direction: column-reverse;">
+            <ui:DropdownField label="Ось" name="DropdownField-CTAxis" index="0" choices="Аксиальная,Сагиттальная,Коронарная" />
+            <ui:SliderInt label="Срез" value="0" high-value="371" show-input-field="true" name="Slider-CTSlicer" />
+        </ui:VisualElement>
+        <ui:VisualElement name="MagneticResonanceImaging" class="mode-container" style="display: none; flex-direction: column-reverse;">
+            <ui:DropdownField label="Ось" name="DropdownField-MRIAxis" index="0" choices="Сагиттальная,Коронарная,Аксиальная" />
+            <ui:SliderInt label="Срез" value="0" high-value="231" show-input-field="true" name="Slider-MRISlicer" />
+            <ui:Toggle label="Фильтр яркости" name="BrightnessToggle" style="display: none;" />
+            <ui:MinMaxSlider label="Диапазон яркости" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px;" />
+            <ui:Slider label="Мин. яркость" value="-0.1" high-value="1.74" name="Slider-MinBrightness" low-value="-0.1" style="display: none;" />
+            <ui:Slider label="Макс. яркость" value="-0.1" high-value="1.74" name="Slider-MaxBrightness" low-value="-0.1" style="display: none;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -9,14 +9,32 @@ public class Menu : MonoBehaviour
     [SerializeField] private List<ModeComponents> modes;
     
     private UIDocument _uiDocument;
-    private DropdownField _dropdownField;
-    private VisualElement[] _atlasToggles;
+    private DropdownField _dropdownFieldMode;
+    private DropdownField _dropdownFieldCTAxis;
+    private DropdownField _dropdownFieldMRIAxis;
+    private SliderInt _sliderCTSlicer;
+    private SliderInt _sliderMRISlicer;
+    private Toggle _brightnessToggle;
+    private MinMaxSlider _brightnessSlider;
+    private Slider _minBrightnessSlider;
+    private Slider _maxBrightnessSlider;
+    private Toggle[] _atlasToggles;
     private Atlas _atlas;
+    private TomographySlicer _slicerCT;
+    private TomographySlicer _slicerMRI;
 
     private void Awake()
     {
         _uiDocument = GetComponent<UIDocument>();
-        _dropdownField = _uiDocument.rootVisualElement.Q<DropdownField>();
+        _dropdownFieldMode = _uiDocument.rootVisualElement.Q<DropdownField>();
+        _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
+        _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
+        _sliderCTSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-CTSlicer");
+        _sliderMRISlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-MRISlicer");
+        _brightnessToggle = _uiDocument.rootVisualElement.Q<Toggle>("BrightnessToggle");
+        _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
+        _minBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MinBrightness");
+        _maxBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MaxBrightness");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -26,36 +44,116 @@ public class Menu : MonoBehaviour
 
         var atlasMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.Atlas);
         _atlas = atlasMode.item.GetComponent<Atlas>();
-        _atlasToggles = atlasMode.menu.Children().ToArray();
+        _atlasToggles = atlasMode.menu.Children().Select(atlasToggle => atlasToggle as Toggle).ToArray();
+        var computedTomographyMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.ComputedTomography);
+        _slicerCT = computedTomographyMode.item.GetComponentInChildren<TomographySlicer>();
+        var magneticResonanceImagingMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.MagneticResonanceImaging);
+        _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<TomographySlicer>();
     }
 
     private void OnEnable()
     {
-        _dropdownField.RegisterValueChangedCallback(OnDropdownFieldChange);
+        _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
+        _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _sliderCTSlicer.RegisterValueChangedCallback(OnSliderChange);
+        _sliderMRISlicer.RegisterValueChangedCallback(OnSliderChange);
+        //_brightnessToggle.RegisterValueChangedCallback(OnBrightnessToggle);
+        _brightnessSlider.RegisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
         {
-            var i1 = i;
-            _atlasToggles[i].RegisterCallback<ChangeEvent<bool>>(evt => _atlas.SetAtlasVisibility(i1, evt.newValue));
+            var index = i;
+            _atlasToggles[i].RegisterValueChangedCallback(evt => _atlas.SetAtlasVisibility(index, evt.newValue));
         }
     }
 
     private void OnDisable()
     {
-        _dropdownField.UnregisterValueChangedCallback(OnDropdownFieldChange);
+        _dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
+        _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _sliderCTSlicer.UnregisterValueChangedCallback(OnSliderChange);
+        _sliderMRISlicer.UnregisterValueChangedCallback(OnSliderChange);
+        _brightnessSlider.UnregisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
         {
-            var i1 = i;
-            _atlasToggles[i].UnregisterCallback<ChangeEvent<bool>>(evt => _atlas.SetAtlasVisibility(i1, evt.newValue));
+            var index = i;
+            _atlasToggles[i].RegisterValueChangedCallback(evt => _atlas.SetAtlasVisibility(index, evt.newValue));
         }
     }
 
-    private void OnDropdownFieldChange(ChangeEvent<string> evt)
+    private void OnDropdownFieldModeChange(ChangeEvent<string> evt)
     {
-        var applicationMode = (ApplicationMode)_dropdownField.index;
+        var applicationMode = (ApplicationMode)_dropdownFieldMode.index;
         foreach (var mode in modes)
         {
             mode.menu.style.display = mode.applicationMode == applicationMode ? DisplayStyle.Flex : DisplayStyle.None;
             mode.item.SetActive(mode.applicationMode == applicationMode);
+        }
+    }
+    
+    private void OnDropdownFieldAxisChange(ChangeEvent<string> evt)
+    {
+        if (evt.target == _dropdownFieldCTAxis)
+        {
+            _slicerCT.SetAxis(_dropdownFieldCTAxis.index);
+            SetSliderHighValue(_sliderCTSlicer, _slicerCT);
+        }
+        else if (evt.target == _dropdownFieldMRIAxis)
+        {
+            _slicerMRI.SetAxis(_dropdownFieldMRIAxis.index);
+            SetSliderHighValue(_sliderMRISlicer, _slicerMRI);
+        }
+    }
+    
+    private void OnSliderChange(ChangeEvent<int> evt)
+    {
+        if (evt.target == _sliderCTSlicer)
+        {
+            _slicerCT.SetIndex(evt.newValue);
+        }
+        else if (evt.target == _sliderMRISlicer)
+        {
+            _slicerMRI.SetIndex(evt.newValue);
+        }
+    }
+
+    private void SetSliderHighValue(SliderInt slider, TomographySlicer slicer)
+    {
+        int maxIndex;
+        switch (slicer.CurrentAxis)
+        {
+            case Axis.Axial:
+                maxIndex = slicer.TextureDepth;
+                break;
+            case Axis.Sagittal:
+                maxIndex = slicer.TextureWidth;
+                break;
+            case Axis.Coronal:
+                maxIndex = slicer.TextureHeight;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        slider.value = Mathf.Clamp(slider.value, 0, maxIndex);
+        slider.highValue = maxIndex;
+    }
+    
+    private void OnBrightnessToggle(ChangeEvent<bool> evt)
+    {
+        _slicerMRI.SetBrightnessFilter(evt.newValue);
+    }
+    
+    private void OnBrightnessSliderChange(ChangeEvent<Vector2> evt)
+    {
+        _slicerMRI.SetBrightness(evt.newValue.x, evt.newValue.y);
+    }
+
+    public void RenewAtlasVisibility()
+    {
+        for (var i = 0; i < _atlasToggles.Length; i++)
+        {
+            _atlas.SetAtlasVisibility(i, _atlasToggles[i].value);
         }
     }
 }
