@@ -264,11 +264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468195051883533120, guid: 3b4b527c3d7572846998db76fe63c0e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7468195051883533120, guid: 3b4b527c3d7572846998db76fe63c0e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7468195051883533120, guid: 3b4b527c3d7572846998db76fe63c0e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -379,9 +379,13 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 65fa40263a54c2d4dbf2956260921837, type: 3}
   m_SortingOrder: 0
+  m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!4 &917734609
 Transform:
   m_ObjectHideFlags: 0
@@ -503,7 +507,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -511,6 +514,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!114 &1135179343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +629,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1574220300}
     m_Modifications:
     - target: {fileID: 1759139737155876115, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759139737155876115, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
@@ -644,6 +652,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3946846131609486548, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946846131609486548, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946846131609486548, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946846131609486548, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5760846361205603254, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_Name
       value: MagneticResonanceImaging
@@ -652,17 +676,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6163065948884618846, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8069744003037908336, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8069744003037908336, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 8069744003037908336, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8069744003037908336, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalRotation.w
@@ -702,40 +730,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8546472040546471172, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8546472040546471172, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8546472040546471172, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8546472040546471172, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8546472040546471172, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9204503952579848121, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: tomographyTexture
       value: 
-      objectReference: {fileID: 11700000, guid: 501e4fc54279d574296f23ead325ea27, type: 2}
+      objectReference: {fileID: 11700000, guid: 33e92337ee5aa5e4097e1e9fb64b9d97, type: 2}
     - target: {fileID: 9204503952579848121, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: 'pivotPoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 1628221771}
+      objectReference: {fileID: 1514478802}
     - target: {fileID: 9204503952579848121, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: 'pivotPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 1197076348}
+      objectReference: {fileID: 1628221771}
     - target: {fileID: 9204503952579848121, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: 'pivotPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 1514478802}
+      objectReference: {fileID: 1197076348}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -854,26 +882,26 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: mouse
+  mTrackableName: ThyroidGlandPhantom
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/mouse.xml
-  mBaseSize: 0.084649
-  mAspectRatioXY: 0.44599468
-  mAspectRatioXZ: 1.4503067
+  mDataSetPath: Vuforia/ThyroidGlandPhantom.xml
+  mBaseSize: 0.1799067
+  mAspectRatioXY: 0.88967454
+  mAspectRatioXZ: 1.111765
   mShowBoundingBox: 0
   mOverrideSnappingPose: 0
-  mBBoxMin: {x: -0.042521, y: -0.000059, z: -0.062955}
-  mBBoxMax: {x: 0.042128, y: 0.037694, z: 0.059812}
+  mBBoxMin: {x: -0.0902916, y: -0.0436074, z: -0.0000849664}
+  mBBoxMax: {x: 0.0896151, y: 0.116451, z: 0.199929}
   mPreviewImage: {fileID: 0}
-  mEnhanceRuntimeDetection: 0
+  mEnhanceRuntimeDetection: 1
   m3DGuideViewModel: {fileID: 0}
   m2DGuideViewImage: {fileID: 0}
   mGuideViewDisplayMode: 1
   m2DGuideViewMaterial: {fileID: 0}
   m3DGuideViewMaterial: {fileID: 0}
-  mLength: 0.084649
-  mWidth: 0.037753
-  mHeight: 0.122767
+  mLength: 0.1799067
+  mWidth: 0.16005841
+  mHeight: 0.20001398
   m2DGuideViewMaterials: []
   m3DGuideViewMaterials: []
   mSelectedGuideView: 
@@ -896,11 +924,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 1621554113, guid: 8a9a760f95896c34689febc965510927, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ModelTargetPreview
   mObserverBehaviour: {fileID: 1574220303}
   mHiddenRoot: {fileID: 0}
-  mTargetName: mouse
-  mDatasetName: Vuforia/mouse.xml
+  mTargetName: ThyroidGlandPhantom
+  mDatasetName: Vuforia/ThyroidGlandPhantom.xml
   mCastedBehaviour: {fileID: 1574220303}
   mModelTargetPreview: {fileID: 0}
 --- !u!4 &1628221771 stripped
@@ -919,18 +947,18 @@ PrefabInstance:
     - target: {fileID: 2046163789923353501, guid: f6647d20f5beb9b41b20db5aa0544b5f, type: 3}
       propertyPath: tomographyTexture
       value: 
-      objectReference: {fileID: 11700000, guid: bcbc8493185b2d04eb9178d207a10bc9, type: 2}
+      objectReference: {fileID: 11700000, guid: f1ad3753a2bf749499bc94ea113bad72, type: 2}
     - target: {fileID: 4896470547126761537, guid: f6647d20f5beb9b41b20db5aa0544b5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4896470547126761537, guid: f6647d20f5beb9b41b20db5aa0544b5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4896470547126761537, guid: f6647d20f5beb9b41b20db5aa0544b5f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4896470547126761537, guid: f6647d20f5beb9b41b20db5aa0544b5f, type: 3}
       propertyPath: m_LocalRotation.w

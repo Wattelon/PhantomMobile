@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 
 public class TomographySlicer : MonoBehaviour
 {
-    [SerializeField] private Tomography currentTomography;
     [SerializeField] private Axis currentAxis;
     [SerializeField][Range(0, 511)] private int currentIndex;
     [SerializeField] private Vector3 dimensions;
@@ -146,12 +145,6 @@ public class TomographySlicer : MonoBehaviour
         _isUpdateSliceDelayed = false;
         UpdateSlice();
     }
-}
-
-public enum Tomography
-{
-    Computed,
-    MagneticResonance
 }
 
 public enum Axis

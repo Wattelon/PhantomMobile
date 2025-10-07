@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "com.ptc.vuforia.engine": "file:com.ptc.vuforia.engine-11.3.4.tgz",
-    "com.unity.adaptiveperformance.google.android": "5.1.5",
-    "com.unity.collab-proxy": "2.8.2",
+    "com.ptc.vuforia.engine": "file:com.ptc.vuforia.engine-11.4.4.tgz",
+    "com.unity.adaptiveperformance.google.android": "5.1.6",
+    "com.unity.collab-proxy": "2.9.3",
     "com.unity.feature.mobile": "1.0.0",
-    "com.unity.ide.rider": "3.0.36",
+    "com.unity.ide.rider": "3.0.38",
     "com.unity.inputsystem": "1.14.2",
-    "com.unity.render-pipelines.universal": "17.1.0",
+    "com.unity.render-pipelines.universal": "17.2.0",
     "com.unity.ugui": "2.0.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",

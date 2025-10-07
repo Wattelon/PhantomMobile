@@ -13,7 +13,8 @@
 *.log
 
 .idea/
-Assets/Resources/Tomography/
+Assets/Resources/Studies/
+Packages/com.ptc.vuforia.engine-11.4.4.tgz
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -76,4 +77,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Packages/com.ptc.vuforia.engine-11.3.4.tgz
