@@ -17,7 +17,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="MagneticResonanceImaging" class="mode-container" style="display: none; flex-direction: column-reverse;">
             <ui:DropdownField label="Ось" name="DropdownField-MRIAxis" index="0" choices="Аксиальная,Сагиттальная,Коронарная" />
-            <ui:SliderInt label="Срез" value="0" high-value="231" show-input-field="true" name="Slider-MRISlicer" />
+            <ui:SliderInt label="Срез" value="0" high-value="179" show-input-field="true" name="Slider-MRISlicer" />
             <ui:Toggle label="Фильтр яркости" name="BrightnessToggle" style="display: none;" />
             <ui:MinMaxSlider label="Диапазон яркости" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px;" />
             <ui:Slider label="Мин. яркость" value="-0.1" high-value="1.74" name="Slider-MinBrightness" low-value="-0.1" style="display: none;" />

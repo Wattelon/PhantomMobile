@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using FellowOakDicom;
 using FellowOakDicom.Imaging;
 using UnityEditor;
 
-public static class TomographyVolumetricGenerator
+public static class StudyVolumetricGenerator
 {
     private static List<DicomFile> _dicomFiles;
     private static DicomDataset _dicomDataset;
@@ -16,6 +15,7 @@ public static class TomographyVolumetricGenerator
     private static int _width;
     private static int _height;
     private static int _depth;
+    private static Texture3D _studyTexture;
     private static float _rescaleSlope;
     private static float _rescaleIntercept;
     private static float _sliceThickness;
@@ -34,6 +34,7 @@ public static class TomographyVolumetricGenerator
         GetTags();
         SetVolumeData();
         CreateTexture();
+        CreateScriptableObject();
     }
     
     private static void LoadDicomFiles()
@@ -62,9 +63,9 @@ public static class TomographyVolumetricGenerator
 
     private static void GetTags()
     {
-        _rescaleSlope = _dicomDataset.GetSingleValue<float>(DicomTag.RescaleSlope);
-        _rescaleIntercept = _dicomDataset.GetSingleValue<float>(DicomTag.RescaleIntercept);
-        _sliceThickness = _dicomDataset.GetSingleValueOrDefault(DicomTag.SliceThickness, 1);
+        _rescaleSlope = _dicomDataset.GetSingleValueOrDefault(DicomTag.RescaleSlope, 1);
+        _rescaleIntercept = _dicomDataset.GetSingleValueOrDefault(DicomTag.RescaleIntercept, -1024);
+        _sliceThickness = _dicomDataset.GetSingleValue<float>(DicomTag.SliceThickness);
         var pixelSpacing = _dicomDataset.GetValues<float>(DicomTag.PixelSpacing);
         _pixelSpacingRow = pixelSpacing[0];
         _pixelSpacingColumn = pixelSpacing[1];
@@ -96,11 +97,18 @@ public static class TomographyVolumetricGenerator
     
     private static void CreateTexture()
     {
-        var texture = new Texture3D(_width, _height, _depth, TextureFormat.Alpha8, false);
-        texture.SetPixels(_colors);
-        texture.Apply();
-        if (!AssetDatabase.IsValidFolder($"Assets/Resources/Studies/{_modality}")) AssetDatabase.CreateFolder("Assets/Resources/Studies", _modality);
-        AssetDatabase.CreateAsset(texture, $"Assets/Resources/Studies/{_modality}/{_modality} {_instanceCreationDate} {_instanceCreationTime}.asset");
+        _studyTexture = new Texture3D(_width, _height, _depth, TextureFormat.Alpha8, false);
+        _studyTexture.SetPixels(_colors);
+        _studyTexture.Apply();
+        if (!AssetDatabase.IsValidFolder($"Assets/Studies/{_modality}")) AssetDatabase.CreateFolder("Assets/Studies", _modality);
+        AssetDatabase.CreateAsset(_studyTexture, $"Assets/Studies/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}.asset");
+    }
+
+    private static void CreateScriptableObject()
+    {
+        var scriptableObject = ScriptableObject.CreateInstance<StudySO>();
+        scriptableObject.Initialize(_studyTexture, _rescaleSlope, _rescaleIntercept, _sliceThickness, _pixelSpacingRow, _pixelSpacingColumn, _modality);
+        AssetDatabase.CreateAsset(scriptableObject, $"Assets/Studies/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}_SO.asset");
     }
 }
 #endif

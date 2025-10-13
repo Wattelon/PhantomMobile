@@ -20,8 +20,8 @@ public class Menu : MonoBehaviour
     private Slider _maxBrightnessSlider;
     private Toggle[] _atlasToggles;
     private Atlas _atlas;
-    private TomographySlicer _slicerCT;
-    private TomographySlicer _slicerMRI;
+    private StudySlicer _slicerCT;
+    private StudySlicer _slicerMRI;
 
     private void Awake()
     {
@@ -46,9 +46,9 @@ public class Menu : MonoBehaviour
         _atlas = atlasMode.item.GetComponent<Atlas>();
         _atlasToggles = atlasMode.menu.Children().Select(atlasToggle => atlasToggle as Toggle).ToArray();
         var computedTomographyMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.ComputedTomography);
-        _slicerCT = computedTomographyMode.item.GetComponentInChildren<TomographySlicer>();
+        _slicerCT = computedTomographyMode.item.GetComponentInChildren<StudySlicer>();
         var magneticResonanceImagingMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.MagneticResonanceImaging);
-        _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<TomographySlicer>();
+        _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<StudySlicer>();
     }
 
     private void OnEnable()
@@ -118,7 +118,7 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void SetSliderHighValue(SliderInt slider, TomographySlicer slicer)
+    private void SetSliderHighValue(SliderInt slider, StudySlicer slicer)
     {
         int maxIndex;
         switch (slicer.CurrentAxis)

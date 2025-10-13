@@ -127,7 +127,7 @@ Transform:
   - {fileID: 3200581158268231987}
   - {fileID: 7054944542733188313}
   - {fileID: 849599168799818661}
-  - {fileID: 3883230901929326108}
+  - {fileID: 7402228078294830068}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2338394097232573910
@@ -158,6 +158,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -179,10 +181,43 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8334121505586027567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7402228078294830068}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7402228078294830068
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334121505586027567}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3883230901929326108}
+  m_Father: {fileID: 4896470547126761537}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8945503533134323801
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +250,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 0.20000002, z: 0.20000005}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4896470547126761537}
+  m_Father: {fileID: 7402228078294830068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &49470462571336379
 MeshFilter:
@@ -245,6 +280,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -266,6 +303,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -282,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e5a0b3c6c52514fbaa76ad82656ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTomography: 0
   currentAxis: 0
   currentIndex: 0
   dimensions: {x: 0.192, y: 0.138, z: 0.2}
@@ -293,4 +330,4 @@ MonoBehaviour:
   filterBrightness: 0
   minBrightness: 0
   maxBrightness: 1
-  tomographyTexture: {fileID: 11700000, guid: bcbc8493185b2d04eb9178d207a10bc9, type: 2}
+  studySO: {fileID: 0}

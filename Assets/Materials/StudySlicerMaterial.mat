@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tomography
+  m_Name: StudySlicerMaterial
   m_Shader: {fileID: -6465566751694194690, guid: dcd1775050ac1984da52a5aafb029e35, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
