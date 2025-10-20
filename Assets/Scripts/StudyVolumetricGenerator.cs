@@ -24,9 +24,10 @@ public static class StudyVolumetricGenerator
     private static string _modality;
     private static string _instanceCreationDate;
     private static string _instanceCreationTime;
-    
+    private static Vector3 _orientationVectorX;
+    private static Vector3 _orientationVectorY;
 
-    [MenuItem("PhantomAR/Load DICOM files")]
+    [MenuItem("PhantomAR/Load DICOM folder")]
     private static void CreateVolumetricTexture()
     {
         LoadDicomFiles();
@@ -72,6 +73,9 @@ public static class StudyVolumetricGenerator
         _modality = _dicomDataset.GetSingleValue<string>(DicomTag.Modality);
         _instanceCreationDate = _dicomDataset.GetSingleValue<string>(DicomTag.InstanceCreationDate);
         _instanceCreationTime = _dicomDataset.GetSingleValue<string>(DicomTag.InstanceCreationTime);
+        var orientationMatrix = _dicomDataset.GetValues<float>(DicomTag.ImageOrientationPatient);
+        _orientationVectorX = new Vector3(orientationMatrix[0],  orientationMatrix[1], orientationMatrix[2]);
+        _orientationVectorY = new Vector3(orientationMatrix[3],  orientationMatrix[4], orientationMatrix[5]);
     }
 
     private static void SetVolumeData()
@@ -107,7 +111,7 @@ public static class StudyVolumetricGenerator
     private static void CreateScriptableObject()
     {
         var scriptableObject = ScriptableObject.CreateInstance<StudySO>();
-        scriptableObject.Initialize(_studyTexture, _rescaleSlope, _rescaleIntercept, _sliceThickness, _pixelSpacingRow, _pixelSpacingColumn, _modality);
+        scriptableObject.Initialize(_studyTexture, _rescaleSlope, _rescaleIntercept, _sliceThickness, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY);
         AssetDatabase.CreateAsset(scriptableObject, $"Assets/Studies/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}_SO.asset");
     }
 }

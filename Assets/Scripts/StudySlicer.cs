@@ -76,7 +76,7 @@ public class StudySlicer : MonoBehaviour
         switch (currentAxis)
         {
             case Axis.Axial:
-                transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+                transform.localRotation = Quaternion.LookRotation(Vector3.Cross(studySO.OrientationVectorX, studySO.OrientationVectorY), -studySO.OrientationVectorY);
                 transform.localPosition = transform.forward * ((-0.5f * TextureDepth + currentIndex) * studySO.SliceThickness / 1000);
                 transform.localScale = new Vector3(studySO.PixelSpacingColumn * TextureWidth / 1000, studySO.PixelSpacingRow * TextureHeight / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureDepth);
