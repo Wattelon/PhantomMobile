@@ -26,6 +26,7 @@ public static class StudyVolumetricGenerator
     private static string _instanceCreationTime;
     private static Vector3 _orientationVectorX;
     private static Vector3 _orientationVectorY;
+    private static Vector3 _orientationVectorZ;
 
     [MenuItem("PhantomAR/Load DICOM folder")]
     private static void CreateVolumetricTexture()
@@ -110,9 +111,9 @@ public static class StudyVolumetricGenerator
 
     private static void CreateScriptableObject()
     {
-        var scriptableObject = ScriptableObject.CreateInstance<StudySO>();
-        scriptableObject.Initialize(_studyTexture, _rescaleSlope, _rescaleIntercept, _sliceThickness, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY);
-        AssetDatabase.CreateAsset(scriptableObject, $"Assets/Studies/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}_SO.asset");
+        var studySO = ScriptableObject.CreateInstance<StudySO>();
+        studySO.Initialize(_studyTexture, _rescaleSlope, _rescaleIntercept, _sliceThickness, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY);
+        AssetDatabase.CreateAsset(studySO, $"Assets/Studies/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}_SO.asset");
     }
 }
 #endif

@@ -8,7 +8,7 @@
 SliderInt #unity-dragger {
     height: 50px;
     top: 37%;
-    width: 30px;
+    width: 40px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -16,7 +16,7 @@ SliderInt #unity-dragger {
 }
 
 MinMaxSlider #unity-dragger VisualElement {
-    width: 30px;
+    width: 40px;
     height: 50px;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -52,4 +52,8 @@ Toggle {
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
+}
+
+.mode-button {
+    flex-grow: 1;
 }

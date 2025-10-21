@@ -22,6 +22,9 @@ public class Menu : MonoBehaviour
     private Atlas _atlas;
     private StudySlicer _slicerCT;
     private StudySlicer _slicerMRI;
+    private Button _modeButtonAtlas;
+    private Button _modeButtonCT;
+    private Button _modeButtonMRI;
 
     private void Awake()
     {
@@ -35,6 +38,9 @@ public class Menu : MonoBehaviour
         _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
         _minBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MinBrightness");
         _maxBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MaxBrightness");
+        _modeButtonAtlas = _uiDocument.rootVisualElement.Q<Button>("Button-ModeAtlas");
+        _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
+        _modeButtonMRI = _uiDocument.rootVisualElement.Q<Button>("Button-ModeMRI");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -53,6 +59,9 @@ public class Menu : MonoBehaviour
 
     private void OnEnable()
     {
+        _modeButtonAtlas.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Atlas);
+        _modeButtonCT.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.ComputedTomography);
+        _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
         _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -69,6 +78,9 @@ public class Menu : MonoBehaviour
 
     private void OnDisable()
     {
+        _modeButtonAtlas.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
+        _modeButtonCT.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
+        _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -79,6 +91,15 @@ public class Menu : MonoBehaviour
         {
             var index = i;
             _atlasToggles[i].RegisterValueChangedCallback(evt => _atlas.SetAtlasVisibility(index, evt.newValue));
+        }
+    }
+    
+    private void OnModeButtonClick(ClickEvent evt, ApplicationMode applicationMode)
+    {
+        foreach (var mode in modes)
+        {
+            mode.menu.style.display = mode.applicationMode == applicationMode ? DisplayStyle.Flex : DisplayStyle.None;
+            mode.item.SetActive(mode.applicationMode == applicationMode);
         }
     }
 
