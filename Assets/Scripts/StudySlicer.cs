@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using UnityEngine.Splines;
 
 public class StudySlicer : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class StudySlicer : MonoBehaviour
     [SerializeField][Range(0, 511)] private int currentIndex;
     [SerializeField] private Vector3 dimensions;
     [SerializeField] private List<Transform> pivotPoints;
+    [SerializeField] private bool moveAlongSpline;
     [SerializeField] private bool filterBrightness;
     [SerializeField][Range(0, 1)] private float minBrightness;
     [SerializeField][Range(0, 1)] private float maxBrightness = 1;
@@ -17,6 +19,7 @@ public class StudySlicer : MonoBehaviour
 
     private MeshRenderer _meshRenderer;
     private Material _material;
+    private SplineAnimate _splineAnimate;
     private LocalKeyword[] _axisKeywords = new LocalKeyword[3];
     private bool _isUpdateSliceDelayed;
     
@@ -39,6 +42,7 @@ public class StudySlicer : MonoBehaviour
         _axisKeywords[1] = _material.shader.keywordSpace.FindKeyword("_AXIS_SAGITTAL");
         _axisKeywords[2] = _material.shader.keywordSpace.FindKeyword("_AXIS_CORONAL");
         meshRenderer.material = _material;
+        if (moveAlongSpline) _splineAnimate = GetComponent<SplineAnimate>();
     }
 
     private void Start()
@@ -71,7 +75,8 @@ public class StudySlicer : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        transform.localPosition = Vector3.forward * (currentIndex * step);
+        if (moveAlongSpline) _splineAnimate.NormalizedTime = (float)currentIndex / TextureDepth;
+        else transform.localPosition = Vector3.forward * (currentIndex * step);
         
         /*switch (currentAxis)
         {

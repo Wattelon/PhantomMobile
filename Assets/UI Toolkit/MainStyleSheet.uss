@@ -46,8 +46,8 @@ MinMaxSlider #unity-dragger VisualElement {
 }
 
 Toggle {
-    align-self: flex-start;
     flex-direction: row-reverse;
+    align-self: flex-start;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -56,4 +56,10 @@ Toggle {
 
 .mode-button {
     flex-grow: 1;
+}
+
+.atlas-icons {
+    -unity-background-scale-mode: scale-to-fit;
+    flex-grow: 1;
+    width: 100px;
 }

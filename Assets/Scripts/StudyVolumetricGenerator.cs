@@ -27,6 +27,7 @@ public static class StudyVolumetricGenerator
     private static Vector3 _orientationVectorX;
     private static Vector3 _orientationVectorY;
     private static Vector3 _orientationVectorZ;
+    private static bool _isMultiFrame;
 
     [MenuItem("PhantomAR/Load DICOM folder")]
     private static void CreateVolumetricTexture()
@@ -56,10 +57,12 @@ public static class StudyVolumetricGenerator
     private static void SetDimensions()
     {
         _dicomDataset = _dicomFiles[0].Dataset;
+        var numberOfFrames = _dicomDataset.GetSingleValue<int>(DicomTag.NumberOfFrames);
+        _isMultiFrame = numberOfFrames > 1;
         var pixelData = DicomPixelData.Create(_dicomDataset);
         _width = pixelData.Width;
         _height = pixelData.Height;
-        _depth = _dicomFiles.Count;
+        _depth = _isMultiFrame ? numberOfFrames : _dicomFiles.Count;
         _colors = new Color[_width * _height * _depth];
     }
 
@@ -67,16 +70,23 @@ public static class StudyVolumetricGenerator
     {
         _rescaleSlope = _dicomDataset.GetSingleValueOrDefault(DicomTag.RescaleSlope, 1);
         _rescaleIntercept = _dicomDataset.GetSingleValueOrDefault(DicomTag.RescaleIntercept, -1024);
-        _sliceThickness = _dicomDataset.GetSingleValue<float>(DicomTag.SliceThickness);
-        var pixelSpacing = _dicomDataset.GetValues<float>(DicomTag.PixelSpacing);
-        _pixelSpacingRow = pixelSpacing[0];
-        _pixelSpacingColumn = pixelSpacing[1];
+        _sliceThickness = _dicomDataset.GetSingleValueOrDefault(DicomTag.SliceThickness, 1);
+        var pixelSpacing = _dicomDataset.GetValues<double>(DicomTag.PixelSpacing);
+        _pixelSpacingRow = (float)pixelSpacing[0];
+        _pixelSpacingColumn = (float)pixelSpacing[1];
         _modality = _dicomDataset.GetSingleValue<string>(DicomTag.Modality);
-        _instanceCreationDate = _dicomDataset.GetSingleValue<string>(DicomTag.InstanceCreationDate);
-        _instanceCreationTime = _dicomDataset.GetSingleValue<string>(DicomTag.InstanceCreationTime);
-        var orientationMatrix = _dicomDataset.GetValues<float>(DicomTag.ImageOrientationPatient);
-        _orientationVectorX = new Vector3(orientationMatrix[0],  orientationMatrix[1], orientationMatrix[2]);
-        _orientationVectorY = new Vector3(orientationMatrix[3],  orientationMatrix[4], orientationMatrix[5]);
+        _instanceCreationDate = _dicomDataset.GetSingleValueOrDefault(DicomTag.InstanceCreationDate, System.DateTime.Now.ToString("yyyy.MM.dd"));
+        _instanceCreationTime = _dicomDataset.GetSingleValueOrDefault(DicomTag.InstanceCreationTime, System.DateTime.Now.ToString("HH.mm.ss"));
+        if (_dicomDataset.TryGetValues(DicomTag.ImageOrientationPatient, out float[] orientationMatrix))
+        {
+            _orientationVectorX = new Vector3(orientationMatrix[0],  orientationMatrix[1], orientationMatrix[2]);
+            _orientationVectorY = new Vector3(orientationMatrix[3],  orientationMatrix[4], orientationMatrix[5]);
+        }
+        else
+        {
+            _orientationVectorX = Vector3.zero;
+            _orientationVectorY = Vector3.zero;
+        }
     }
 
     private static void SetVolumeData()
@@ -85,8 +95,7 @@ public static class StudyVolumetricGenerator
         {
             var zOffset = z * _height * _width;
             
-            var file = _dicomFiles[z];
-            var image = new DicomImage(file.Dataset).RenderImage();
+            var image = _isMultiFrame ? new DicomImage(_dicomFiles[0].Dataset).RenderImage(z) : new DicomImage(_dicomFiles[z].Dataset).RenderImage();
 
             for (var y = 0; y < _height; y++)
             {

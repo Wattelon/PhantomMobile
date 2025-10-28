@@ -12,8 +12,10 @@ public class Menu : MonoBehaviour
     private DropdownField _dropdownFieldMode;
     private DropdownField _dropdownFieldCTAxis;
     private DropdownField _dropdownFieldMRIAxis;
+    private DropdownField _dropdownFieldUSAxis;
     private SliderInt _sliderCTSlicer;
     private SliderInt _sliderMRISlicer;
+    private SliderInt _sliderUSSlicer;
     private Toggle _brightnessToggle;
     private MinMaxSlider _brightnessSlider;
     private Slider _minBrightnessSlider;
@@ -22,9 +24,11 @@ public class Menu : MonoBehaviour
     private Atlas _atlas;
     private StudySlicer _slicerCT;
     private StudySlicer _slicerMRI;
+    private StudySlicer _slicerUS;
     private Button _modeButtonAtlas;
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
+    private Button _modeButtonUS;
 
     private void Awake()
     {
@@ -32,8 +36,10 @@ public class Menu : MonoBehaviour
         _dropdownFieldMode = _uiDocument.rootVisualElement.Q<DropdownField>();
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
         _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
+        _dropdownFieldUSAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-USAxis");
         _sliderCTSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-CTSlicer");
         _sliderMRISlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-MRISlicer");
+        _sliderUSSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-USSlicer");
         _brightnessToggle = _uiDocument.rootVisualElement.Q<Toggle>("BrightnessToggle");
         _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
         _minBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MinBrightness");
@@ -41,6 +47,7 @@ public class Menu : MonoBehaviour
         _modeButtonAtlas = _uiDocument.rootVisualElement.Q<Button>("Button-ModeAtlas");
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
         _modeButtonMRI = _uiDocument.rootVisualElement.Q<Button>("Button-ModeMRI");
+        _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -55,6 +62,8 @@ public class Menu : MonoBehaviour
         _slicerCT = computedTomographyMode.item.GetComponentInChildren<StudySlicer>();
         var magneticResonanceImagingMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.MagneticResonanceImaging);
         _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<StudySlicer>();
+        var ultrasoundMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.Ultrasound);
+        _slicerUS = ultrasoundMode.item.GetComponentInChildren<StudySlicer>();
     }
 
     private void OnEnable()
@@ -62,11 +71,14 @@ public class Menu : MonoBehaviour
         _modeButtonAtlas.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Atlas);
         _modeButtonCT.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.ComputedTomography);
         _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
+        _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
         _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _sliderCTSlicer.RegisterValueChangedCallback(OnSliderChange);
         _sliderMRISlicer.RegisterValueChangedCallback(OnSliderChange);
+        _sliderUSSlicer.RegisterValueChangedCallback(OnSliderChange);
         //_brightnessToggle.RegisterValueChangedCallback(OnBrightnessToggle);
         _brightnessSlider.RegisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
@@ -81,11 +93,14 @@ public class Menu : MonoBehaviour
         _modeButtonAtlas.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonCT.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
+        _modeButtonUS.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _dropdownFieldUSAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _sliderCTSlicer.UnregisterValueChangedCallback(OnSliderChange);
         _sliderMRISlicer.UnregisterValueChangedCallback(OnSliderChange);
+        _sliderUSSlicer.UnregisterValueChangedCallback(OnSliderChange);
         _brightnessSlider.UnregisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
         {
@@ -125,18 +140,18 @@ public class Menu : MonoBehaviour
             _slicerMRI.SetAxis(_dropdownFieldMRIAxis.index);
             SetSliderHighValue(_sliderMRISlicer, _slicerMRI);
         }
+        else if (evt.target == _dropdownFieldUSAxis)
+        {
+            _slicerUS.SetAxis(_dropdownFieldUSAxis.index);
+            SetSliderHighValue(_sliderUSSlicer, _slicerUS);
+        }
     }
     
     private void OnSliderChange(ChangeEvent<int> evt)
     {
-        if (evt.target == _sliderCTSlicer)
-        {
-            _slicerCT.SetIndex(evt.newValue);
-        }
-        else if (evt.target == _sliderMRISlicer)
-        {
-            _slicerMRI.SetIndex(evt.newValue);
-        }
+        if (evt.target == _sliderCTSlicer) _slicerCT.SetIndex(evt.newValue);
+        else if (evt.target == _sliderMRISlicer) _slicerMRI.SetIndex(evt.newValue);
+        else if (evt.target == _sliderUSSlicer) _slicerUS.SetIndex(evt.newValue);
     }
 
     private void SetSliderHighValue(SliderInt slider, StudySlicer slicer)
@@ -184,7 +199,8 @@ public enum ApplicationMode
     View,
     Atlas,
     ComputedTomography,
-    MagneticResonanceImaging
+    MagneticResonanceImaging,
+    Ultrasound
 }
 
 [Serializable]

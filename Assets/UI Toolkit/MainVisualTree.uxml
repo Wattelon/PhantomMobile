@@ -1,32 +1,78 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyleSheet.uss?fileID=7433441132597879392&amp;guid=eb97ef6a837eb6f469980fd06f1838d2&amp;type=3#MainStyleSheet" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
-        <ui:VisualElement name="ModeButtons" style="flex-direction: row;">
-            <ui:Button text="Атлас" name="Button-ModeAtlas" class="mode-button" />
-            <ui:Button text="КТ" name="Button-ModeCT" class="mode-button" />
-            <ui:Button text="МРТ" name="Button-ModeMRI" class="mode-button" />
+        <ui:VisualElement name="ModeContainer" style="flex-direction: row;">
+            <ui:Button name="Button-ModeAtlas" class="mode-button" style="flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/Atlas.png?fileID=2800000&amp;guid=33b69f18437c8f04799dada1c62c4176&amp;type=3#Atlas&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label text="Atlas" />
+            </ui:Button>
+            <ui:Button name="Button-ModeCT" class="mode-button" style="flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/CT.png?fileID=2800000&amp;guid=82bc1ad50878ef5409a79c2ce69a975d&amp;type=3#CT&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label text="CT" />
+            </ui:Button>
+            <ui:Button name="Button-ModeMRI" class="mode-button" style="flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/MRI.png?fileID=2800000&amp;guid=08205dd18f48b7645a7e07e20eeec044&amp;type=3#MRI&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label text="MRI" />
+            </ui:Button>
+            <ui:Button name="Button-ModeUS" class="mode-button" style="flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/US.png?fileID=2800000&amp;guid=3eccbd64204f3e444bf3859fcedcd072&amp;type=3#US&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label text="US" />
+            </ui:Button>
         </ui:VisualElement>
         <ui:DropdownField label="Режим" choices="Просмотр,Атлас,КТ,МРТ" index="0" name="DropdownField-Mode" style="display: none;" />
         <ui:VisualElement name="Atlas" class="mode-container" style="display: none; flex-direction: column;">
-            <ui:Toggle label="Кожа" name="ToggleSkin" />
-            <ui:Toggle label="Кости" name="ToggleBones" />
-            <ui:Toggle label="Артерии" name="ToggleArteries" />
-            <ui:Toggle label="Вены" name="ToggleVeins" />
-            <ui:Toggle label="Трахея" name="ToggleThrachea" />
-            <ui:Toggle label="Лимфатические узлы" name="ToggleLymphNodes" />
-            <ui:Toggle label="Щитовидная железа" name="ToggleThyroidGland" />
+            <ui:Toggle label="Skin" name="ToggleSkin">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Skin.png?fileID=2800000&amp;guid=c9cc547e522505f458c30b13fdababc4&amp;type=3#Skin&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Bones" name="ToggleBones">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Bones.png?fileID=2800000&amp;guid=ce098eaabc53b75499edb63a02e30cd9&amp;type=3#Bones&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Arteries" name="ToggleArteries">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Artery.png?fileID=2800000&amp;guid=bd551029cf764de43a3c5efa27649f6a&amp;type=3#Artery&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Veins" name="ToggleVeins">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Vein.png?fileID=2800000&amp;guid=5aee947c0aef02247b6361ad77ab97a3&amp;type=3#Vein&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Trachea" name="ToggleThrachea">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Trachea.png?fileID=2800000&amp;guid=444c4ba10134b8d40ac87e0453c17968&amp;type=3#Trachea&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Lymph nodes" name="ToggleLymphNodes">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/LymphNodes.png?fileID=2800000&amp;guid=22416270b2258234493bf01fbe0a37f4&amp;type=3#LymphNodes&quot;);" />
+            </ui:Toggle>
+            <ui:Toggle label="Thyroid gland" name="ToggleThyroidGland">
+                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/ThyroidGland.png?fileID=2800000&amp;guid=84f491dc8c2cf114c96d2a4ef4d6d17e&amp;type=3#ThyroidGland&quot;);" />
+            </ui:Toggle>
         </ui:VisualElement>
         <ui:VisualElement name="ComputedTomography" class="mode-container" style="display: none; flex-direction: column-reverse;">
-            <ui:DropdownField label="Ось" name="DropdownField-CTAxis" index="0" choices="Аксиальная,Сагиттальная,Коронарная" />
-            <ui:SliderInt label="Срез" value="0" high-value="371" show-input-field="true" name="Slider-CTSlicer" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;" />
+                <ui:DropdownField label="Axis" name="DropdownField-CTAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;" />
+                <ui:SliderInt label="Slice" value="0" high-value="371" show-input-field="true" name="Slider-CTSlicer" style="flex-grow: 1;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="MagneticResonanceImaging" class="mode-container" style="display: none; flex-direction: column-reverse;">
-            <ui:DropdownField label="Ось" name="DropdownField-MRIAxis" index="0" choices="Аксиальная,Сагиттальная,Коронарная" />
-            <ui:SliderInt label="Срез" value="0" high-value="179" show-input-field="true" name="Slider-MRISlicer" />
-            <ui:Toggle label="Фильтр яркости" name="BrightnessToggle" style="display: none;" />
-            <ui:MinMaxSlider label="Диапазон яркости" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;" />
+                <ui:DropdownField label="Axis" name="DropdownField-MRIAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;" />
+                <ui:SliderInt label="Slice" value="0" high-value="179" show-input-field="true" name="Slider-MRISlicer" style="flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Brightness.png?fileID=2800000&amp;guid=29cda013d3da2174382a455458b151ce&amp;type=3#Brightness&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;" />
+                <ui:MinMaxSlider label="Brightness filter" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px; flex-grow: 1;" />
+            </ui:VisualElement>
+            <ui:Toggle label="Brightness filter" name="BrightnessToggle" style="display: none;" />
             <ui:Slider label="Мин. яркость" value="-0.1" high-value="1.74" name="Slider-MinBrightness" low-value="-0.1" style="display: none;" />
             <ui:Slider label="Макс. яркость" value="-0.1" high-value="1.74" name="Slider-MaxBrightness" low-value="-0.1" style="display: none;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Ultrasound" class="mode-container" style="display: none; flex-direction: column-reverse;">
+            <ui:DropdownField label="Вариация" name="DropdownField-USAxis" index="0" choices="Слева,Центральная,Справа" style="display: none;" />
+            <ui:SliderInt label="Slice" high-value="251" show-input-field="true" name="Slider-USSlicer" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
