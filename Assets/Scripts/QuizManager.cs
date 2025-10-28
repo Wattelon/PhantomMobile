@@ -14,7 +14,7 @@ public class QuestionData
 public class QuizManager : MonoBehaviour
 {
     [Header("Questions")]
-    public List<QuestionData> questions = new List<QuestionData>();
+    public List<QuestionData> questions = new();
 
     [Header("UI Elements")]
     private Label _questionText;
@@ -24,6 +24,7 @@ public class QuizManager : MonoBehaviour
     private Label _timerLabel;
     private VisualElement _questionImage;
     private VisualElement _resultsPanel;
+    private VisualElement _testPanel;
     private Label _resultsText;
 
     private int _currentQuestionIndex;
@@ -31,7 +32,7 @@ public class QuizManager : MonoBehaviour
     private float _elapsedTime;
     private bool _isTestActive = true;
 
-    private void Start()
+    private void Awake()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         
@@ -42,13 +43,25 @@ public class QuizManager : MonoBehaviour
         _timerLabel     = root.Q<Label>("Timer");
         _questionImage  = root.Q<VisualElement>("QuestionImage");
         _resultsPanel   = root.Q<VisualElement>("ResultsPanel");
+        _testPanel   = root.Q<VisualElement>("TestPanel");
         _resultsText    = root.Q<Label>("ResultsText");
 
-        _resultsPanel.style.display = DisplayStyle.None;
+        
+    }
 
-        _submitButton.clicked += OnSubmitSubmitted;
-
+    private void Start()
+    {
         ShowQuestion();
+    }
+
+    private void OnEnable()
+    {
+        _submitButton.RegisterCallback<ClickEvent>(OnSubmitSubmitted);
+    }
+    
+    private void OnDisable()
+    {
+        _submitButton.UnregisterCallback<ClickEvent>(OnSubmitSubmitted);
     }
 
     private void Update()
@@ -85,7 +98,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private void OnSubmitSubmitted()
+    private void OnSubmitSubmitted(ClickEvent evt)
     {
         var userAnswer = _answerField.value.Trim().ToLower();
         var correct = questions[_currentQuestionIndex].correctAnswer.Trim().ToLower();
@@ -104,13 +117,7 @@ public class QuizManager : MonoBehaviour
     private void EndTest()
     {
         _isTestActive = false;
-
-        _questionText.style.display = DisplayStyle.None;
-        _answerField.style.display = DisplayStyle.None;
-        _submitButton.style.display = DisplayStyle.None;
-        _questionImage.style.display = DisplayStyle.None;
-        _questionCount.style.display = DisplayStyle.None;
-
+        _testPanel.style.display = DisplayStyle.None;
         _resultsPanel.style.display = DisplayStyle.Flex;
         _resultsText.text = $"Тест завершён!\n" +
                            $"Правильных ответов: {_correctAnswers} из {questions.Count}\n" +
