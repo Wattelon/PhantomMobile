@@ -1,22 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[Serializable]
-public class QuestionData
-{
-    public string questionText;
-    public string correctAnswer;
-    public Texture2D questionImage;
-}
-
 public class QuizManager : MonoBehaviour
 {
-    [Header("Questions")]
-    public List<QuestionData> questions = new();
+    public List<Question> questions = new();
 
-    [Header("UI Elements")]
     private Label _questionText;
     private TextField _answerField;
     private Button _submitButton;
@@ -43,10 +34,8 @@ public class QuizManager : MonoBehaviour
         _timerLabel     = root.Q<Label>("Timer");
         _questionImage  = root.Q<VisualElement>("QuestionImage");
         _resultsPanel   = root.Q<VisualElement>("ResultsPanel");
-        _testPanel   = root.Q<VisualElement>("TestPanel");
+        _testPanel      = root.Q<VisualElement>("TestPanel");
         _resultsText    = root.Q<Label>("ResultsText");
-
-        
     }
 
     private void Start()
@@ -82,14 +71,14 @@ public class QuizManager : MonoBehaviour
         }
 
         var q = questions[_currentQuestionIndex];
-        _questionText.text = q.questionText;
+        _questionText.text = q.Text;
         _answerField.value = "";
 
         _questionCount.text = $"Вопрос {_currentQuestionIndex + 1}/{questions.Count}";
         
-        if (q.questionImage != null)
+        if (q.Image != null)
         {
-            _questionImage.style.backgroundImage = new StyleBackground(q.questionImage);
+            _questionImage.style.backgroundImage = new StyleBackground(q.Image);
             _questionImage.style.display = DisplayStyle.Flex;
         }
         else
@@ -100,10 +89,10 @@ public class QuizManager : MonoBehaviour
 
     private void OnSubmitSubmitted(ClickEvent evt)
     {
-        var userAnswer = _answerField.value.Trim().ToLower();
-        var correct = questions[_currentQuestionIndex].correctAnswer.Trim().ToLower();
+        var userAnswer = _answerField.value;
+        var correct = questions[_currentQuestionIndex].CheckAnswer(userAnswer);
 
-        if (userAnswer == correct)
+        if (correct)
             _correctAnswers++;
 
         _currentQuestionIndex++;
@@ -119,8 +108,9 @@ public class QuizManager : MonoBehaviour
         _isTestActive = false;
         _testPanel.style.display = DisplayStyle.None;
         _resultsPanel.style.display = DisplayStyle.Flex;
-        _resultsText.text = $"Тест завершён!\n" +
-                           $"Правильных ответов: {_correctAnswers} из {questions.Count}\n" +
-                           $"Время прохождения: {_elapsedTime:F1} секунд";
+        var resultText = "Тест завершён!\n" +
+                         $"Правильных ответов: {_correctAnswers} из {questions.Count}\n" +
+                         $"Время прохождения: {(int)_elapsedTime} секунд";
+        _resultsText.text = resultText;
     }
 }

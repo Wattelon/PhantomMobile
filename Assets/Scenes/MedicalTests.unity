@@ -178,11 +178,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.05
-  far clip plane: 2000
+  near clip plane: 0
+  far clip plane: 0.01
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 1
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -417,22 +417,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuizManager
   questions:
-  - questionText: "\u041A\u0430\u043A \u0434\u0435\u043B\u0430?"
-    correctAnswer: "\u041D\u043E\u0440\u043C\u0430\u043B\u044C\u043D\u043E"
-    questionImage: {fileID: 2800000, guid: 377f503e0c5a09643825a05e4a3ebc85, type: 3}
-  - questionText: "\u0417\u0430\u0447\u0435\u043C \u0442\u044B \u0432\u0441\u0435
-      \u044D\u0442\u043E \u0434\u0435\u043B\u0430\u0435\u0448\u044C?"
-    correctAnswer: "\u0420\u0430\u0434\u0438 \u0434\u0435\u043D\u0435\u0433"
-    questionImage: {fileID: 2800000, guid: b9737493c7142554fb10661dec3b366d, type: 3}
-  - questionText: "\u0427\u0442\u043E \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u043E
+  - Text: "\u0427\u0442\u043E \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u043E
       \u043D\u0430 \u0441\u043D\u0438\u043C\u043A\u0435?"
-    correctAnswer: "\u0429\u0438\u0442\u043E\u0432\u0438\u0434\u043D\u0430\u044F
-      \u0436\u0435\u043B\u0435\u0437\u0430"
-    questionImage: {fileID: 2800000, guid: b9737493c7142554fb10661dec3b366d, type: 3}
-  - questionText: "\u0422\u044B \u0441\u0430\u043C\u0430 \u043D\u0430\u043F\u0438\u0441\u0430\u043B\u0430
-      \u044D\u0442\u043E \u043A\u043E\u0434?"
-    correctAnswer: "\u041D\u0435\u0442"
-    questionImage: {fileID: 2800000, guid: b9737493c7142554fb10661dec3b366d, type: 3}
+    Answers:
+    - "\u0449\u0438\u0442\u043E\u0432\u0438\u0434\u043A\u0430"
+    - "\u0449\u0438\u0442\u043E\u0432\u0438\u0434\u043D\u0430\u044F \u0436\u0435\u043B\u0435\u0437\u0430"
+    - "\u0436\u0435\u043B\u0435\u0437\u0430 \u0449\u0438\u0442\u043E\u0432\u0438\u0434\u043D\u0430\u044F"
+    Image: {fileID: 2800000, guid: b9737493c7142554fb10661dec3b366d, type: 3}
+  - Text: "\u041A\u0430\u043A\u0430\u044F \u043C\u043E\u0434\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u044C
+      \u0441\u043D\u0438\u043C\u043A\u0430?"
+    Answers:
+    - "\u0443\u0437\u0438"
+    - "\u0443\u043B\u044C\u0442\u0440\u0430\u0437\u0432\u0443\u043A\u043E\u0432\u043E\u0435
+      \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0435"
+    Image: {fileID: 2800000, guid: b9737493c7142554fb10661dec3b366d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
