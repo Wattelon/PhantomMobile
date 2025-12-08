@@ -15,6 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/QuestScene.unity
     guid: 784ed66fdf3365141abafeb17c82f30c
   m_configObjects:
+    com.unity.adaptivePerformance.basic.provider_settings: {fileID: 11400000, guid: a2354e5710f01df4aa12f9e413511c96, type: 2}
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: aff80eed53f4e9b458087ea8efd2205e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: dcd3594aba8215c4db36e4aaab26388d, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 017e76555b0d96448bcc1e8c0b70e89c, type: 2}
