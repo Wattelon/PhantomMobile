@@ -108,9 +108,10 @@ public class QuizManager : MonoBehaviour
         _isTestActive = false;
         _testPanel.style.display = DisplayStyle.None;
         _resultsPanel.style.display = DisplayStyle.Flex;
-        var resultText = "Тест завершён!\n" +
-                         $"Правильных ответов: {_correctAnswers} из {questions.Count}\n" +
-                         $"Время прохождения: {(int)_elapsedTime} секунд";
-        _resultsText.text = resultText;
+        _resultsText.text = "Тест завершён!\n" +
+                            $"Правильных ответов: {_correctAnswers} из {questions.Count}\n" +
+                            $"Время прохождения: {(int)_elapsedTime} секунд";
+        Debug.Log(Application.persistentDataPath);
+        File.AppendAllText(Application.persistentDataPath + "/results.txt", $"Прохождение теста {DateTime.Now:yyyy.MM.dd HH:mm:ss} - {_correctAnswers} из {questions.Count} за {_elapsedTime} секунд\n");
     }
 }
