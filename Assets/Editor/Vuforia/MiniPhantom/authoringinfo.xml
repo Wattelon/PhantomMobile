@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<QCARInfo>
+    <TargetSet version="36.0" toolVersion="v7.3.1">
+        <ModelTarget name="MiniPhantom" targetId="5713e786b6bc4ab09607506031284d86" version="14.0" toolVersion="v7.3.1" bbox="-0.0225729 -0.0109019 -2.12416e-05 0.0224046 0.0291127 0.0499822" trackingMode="car" upVector="0.0 1.0 0.0" optimizeTrackingFor="low_feature_objects" realisticTextures="no" />
+    </TargetSet>
+    <Assembly name="MiniPhantom" assemblyId="3b2f04fc02254066a17e938464bc3a84">
+        <Part name="MiniPhantom" translation="0 0 0" rotation="AD: 0 0 1 0" />
+        <EntryPoint name="(none)" trained="yes" />
+    </Assembly>
+</QCARInfo>

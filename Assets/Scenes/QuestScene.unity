@@ -119,62 +119,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &225272244 stripped
+--- !u!1 &66621694 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 657184242118504722, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
   m_PrefabInstance: {fileID: 880413743}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &225272249
+--- !u!114 &66621700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225272244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
-  m_Version: 2
---- !u!114 &225272250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225272244}
+  m_GameObject: {fileID: 66621694}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 816b289ef451e094f9ae174fb4cf8db0, type: 3}
@@ -182,13 +138,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.XR.ARFoundation::UnityEngine.XR.ARFoundation.ARCameraBackground
   m_UseCustomMaterial: 0
   m_CustomMaterial: {fileID: 0}
---- !u!114 &225272251
+--- !u!114 &66621701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225272244}
+  m_GameObject: {fileID: 66621694}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4966719baa26e4b0e8231a24d9bd491a, type: 3}
@@ -403,6 +359,7 @@ GameObject:
   - component: {fileID: 710208507}
   - component: {fileID: 710208506}
   - component: {fileID: 710208505}
+  - component: {fileID: 710208508}
   m_Layer: 0
   m_Name: Phantom
   m_TagString: Untagged
@@ -419,7 +376,7 @@ Transform:
   m_GameObject: {fileID: 710208498}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -503,7 +460,7 @@ MonoBehaviour:
   m_InteractionLayers:
     m_Bits: 1
   m_DistanceCalculationMode: 1
-  m_SelectMode: 0
+  m_SelectMode: 1
   m_FocusMode: 1
   m_CustomReticle: {fileID: 0}
   m_AllowGazeInteraction: 0
@@ -582,7 +539,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
-  m_TrackScale: 0
+  m_TrackScale: 1
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
@@ -608,7 +565,8 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
+  m_StartingMultipleGrabTransformers:
+  - {fileID: 710208508}
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
   m_LimitLinearVelocity: 0
@@ -664,6 +622,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5827068182827437307, guid: 9799978f8385aef4baf3c29fbe1a33f6, type: 3}
+--- !u!114 &710208508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710208498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
+  m_PermittedDisplacementAxes: -1
+  m_ConstrainedAxisDisplacementMode: 1
+  m_TwoHandedRotationMode: 1
+  m_AllowOneHandedScaling: 0
+  m_AllowTwoHandedScaling: 1
+  m_OneHandedScaleSpeed: 0.5
+  m_ThresholdMoveRatioForScale: 0.05
+  m_ClampScaling: 1
+  m_MinimumScaleRatio: 0.25
+  m_MaximumScaleRatio: 2
+  m_ScaleMultiplier: 1
 --- !u!1 &853127344
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,21 +713,25 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 657184242222895507, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657184242539281771, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_AttachTransform
+    - target: {fileID: 810019319561094050, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_LeftControllerTransform
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 657184242539281771, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_RayOriginTransform
+    - target: {fileID: 810019319561094050, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_RightControllerTransform
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 657184243640684908, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 1161648815727003628, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161648815727003628, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_AimTargetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1525377159282626914, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_ControllerTransform
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1820897918385990095, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_RequestedTrackingOriginMode
@@ -796,25 +781,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin Hands (XR Rig)
       objectReference: {fileID: 0}
-    - target: {fileID: 2218496723442559054, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2945826935290517874, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_AttachTransform
+    - target: {fileID: 3581603309145056405, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_ControllerTransform
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2945826935290517874, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_RayOriginTransform
+    - target: {fileID: 4399089192702052810, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_Target
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3421079552115229881, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4911947107372535036, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 4399089192702052810, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+      propertyPath: m_AimTargetObject
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5531948733902918658, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_GazeInteractor
@@ -843,23 +820,22 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5531948733902918658, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     m_RemovedGameObjects:
-    - {fileID: 3421079552115229881, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-    - {fileID: 657184242222895507, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-    - {fileID: 4911947107372535036, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     - {fileID: 657184243640684908, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 4911947107372535036, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 657184242222895507, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 3421079552115229881, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     - {fileID: 6585113627354992487, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     - {fileID: 5990959448286565102, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 5667465548851856616, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
+    - {fileID: 4605643766788160351, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 657184242118504722, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 225272249}
+      addedObject: {fileID: 66621701}
     - targetCorrespondingSourceObject: {fileID: 657184242118504722, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 225272251}
-    - targetCorrespondingSourceObject: {fileID: 657184242118504722, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 225272250}
+      addedObject: {fileID: 66621700}
   m_SourcePrefab: {fileID: 100100000, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
 --- !u!1001 &1317279683
 PrefabInstance:
@@ -1236,8 +1212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable
-  m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_InteractionManager: {fileID: 1395035318}
+  m_Colliders:
+  - {fileID: 2050162888}
   m_InteractionLayers:
     m_Bits: 1
   m_DistanceCalculationMode: 1
@@ -1432,7 +1409,7 @@ GameObject:
   - component: {fileID: 7075922273444041198}
   - component: {fileID: 2050162888}
   - component: {fileID: 1956160284708139811}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UI Toolkit Grab UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1484,7 +1461,7 @@ Transform:
   m_GameObject: {fileID: 5481525149041791858}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -1, y: 0.9, z: 0.5}
+  m_LocalPosition: {x: -0.5, y: 0.9, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1503,8 +1480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_InteractionManager: {fileID: 1395035318}
+  m_Colliders:
+  - {fileID: 6242857087739880591}
   m_InteractionLayers:
     m_Bits: 1
   m_DistanceCalculationMode: 1
@@ -1564,7 +1542,7 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   m_AutoFindParentInteractableInHierarchy: 0
-  m_ParentInteractableObject: {fileID: 0}
+  m_ParentInteractableObject: {fileID: 1956160284708139811}
 --- !u!114 &6941640647732778709
 MonoBehaviour:
   m_ObjectHideFlags: 0

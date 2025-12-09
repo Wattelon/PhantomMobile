@@ -20,7 +20,7 @@
             </ui:Button>
         </ui:VisualElement>
         <ui:DropdownField label="&#1056;&#1077;&#1078;&#1080;&#1084;" choices="&#1055;&#1088;&#1086;&#1089;&#1084;&#1086;&#1090;&#1088;,&#1040;&#1090;&#1083;&#1072;&#1089;,&#1050;&#1058;,&#1052;&#1056;&#1058;" index="0" name="DropdownField-Mode" style="display: none;"/>
-        <ui:VisualElement name="Atlas" class="mode-container" style="display: flex; flex-direction: column;">
+        <ui:VisualElement name="Atlas" class="mode-container" style="display: none; flex-direction: column;">
             <ui:Toggle label="Skin" name="ToggleSkin">
                 <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Skin.png?fileID=2800000&amp;guid=c9cc547e522505f458c30b13fdababc4&amp;type=3#Skin&quot;);"/>
             </ui:Toggle>
