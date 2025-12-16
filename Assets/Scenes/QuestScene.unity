@@ -1347,9 +1347,9 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 65fa40263a54c2d4dbf2956260921837, type: 3}
   m_SortingOrder: 0
   m_Position: 0
-  m_WorldSpaceSizeMode: 0
-  m_WorldSpaceWidth: 300
-  m_WorldSpaceHeight: 400
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1080
+  m_WorldSpaceHeight: 1920
   m_PivotReferenceSize: 1
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
@@ -1564,6 +1564,7 @@ MonoBehaviour:
     item: {fileID: 1983177030}
   - applicationMode: 4
     item: {fileID: 1317279685}
+  locales: []
 --- !u!54 &7075922273444041198
 Rigidbody:
   m_ObjectHideFlags: 0

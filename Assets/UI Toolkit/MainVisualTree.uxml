@@ -1,78 +1,145 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyleSheet.uss?fileID=7433441132597879392&amp;guid=eb97ef6a837eb6f469980fd06f1838d2&amp;type=3#MainStyleSheet"/>
-    <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
-        <ui:VisualElement name="ModeContainer" style="flex-direction: row;">
-            <ui:Button name="Button-ModeAtlas" class="mode-button" style="flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/Atlas.png?fileID=2800000&amp;guid=33b69f18437c8f04799dada1c62c4176&amp;type=3#Atlas&quot;); -unity-background-scale-mode: scale-to-fit;"/>
-                <ui:Label text="Atlas"/>
-            </ui:Button>
-            <ui:Button name="Button-ModeCT" class="mode-button" style="flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/CT.png?fileID=2800000&amp;guid=82bc1ad50878ef5409a79c2ce69a975d&amp;type=3#CT&quot;); -unity-background-scale-mode: scale-to-fit;"/>
-                <ui:Label text="CT"/>
-            </ui:Button>
-            <ui:Button name="Button-ModeMRI" class="mode-button" style="flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/MRI.png?fileID=2800000&amp;guid=08205dd18f48b7645a7e07e20eeec044&amp;type=3#MRI&quot;); -unity-background-scale-mode: scale-to-fit;"/>
-                <ui:Label text="MRI"/>
-            </ui:Button>
-            <ui:Button name="Button-ModeUS" class="mode-button" style="flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/US.png?fileID=2800000&amp;guid=3eccbd64204f3e444bf3859fcedcd072&amp;type=3#US&quot;); -unity-background-scale-mode: scale-to-fit;"/>
-                <ui:Label text="US"/>
-            </ui:Button>
+    <ui:VisualElement style="flex-grow: 1; padding-top: 5%; padding-right: 2%; padding-bottom: 5%; padding-left: 2%;">
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
+            <ui:Button text="&#127759;&#65038;" name="Button-Language" emoji-fallback-support="true" style="aspect-ratio: 1; background-color: rgba(0, 0, 0, 0); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-background-image-tint-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);"/>
+            <ui:DropdownField label="" choices="English,&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;,Portugu&#234;s" index="0" name="DropdownField-Language" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; display: none; width: 40%;"/>
         </ui:VisualElement>
-        <ui:DropdownField label="&#1056;&#1077;&#1078;&#1080;&#1084;" choices="&#1055;&#1088;&#1086;&#1089;&#1084;&#1086;&#1090;&#1088;,&#1040;&#1090;&#1083;&#1072;&#1089;,&#1050;&#1058;,&#1052;&#1056;&#1058;" index="0" name="DropdownField-Mode" style="display: none;"/>
-        <ui:VisualElement name="Atlas" class="mode-container" style="display: none; flex-direction: column;">
-            <ui:Toggle label="Skin" name="ToggleSkin">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Skin.png?fileID=2800000&amp;guid=c9cc547e522505f458c30b13fdababc4&amp;type=3#Skin&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Bones" name="ToggleBones">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Bones.png?fileID=2800000&amp;guid=ce098eaabc53b75499edb63a02e30cd9&amp;type=3#Bones&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Arteries" name="ToggleArteries">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Artery.png?fileID=2800000&amp;guid=bd551029cf764de43a3c5efa27649f6a&amp;type=3#Artery&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Veins" name="ToggleVeins">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Vein.png?fileID=2800000&amp;guid=5aee947c0aef02247b6361ad77ab97a3&amp;type=3#Vein&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Trachea" name="ToggleThrachea">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Trachea.png?fileID=2800000&amp;guid=444c4ba10134b8d40ac87e0453c17968&amp;type=3#Trachea&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Lymph nodes" name="ToggleLymphNodes">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/LymphNodes.png?fileID=2800000&amp;guid=22416270b2258234493bf01fbe0a37f4&amp;type=3#LymphNodes&quot;);"/>
-            </ui:Toggle>
-            <ui:Toggle label="Thyroid gland" name="ToggleThyroidGland">
-                <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/ThyroidGland.png?fileID=2800000&amp;guid=84f491dc8c2cf114c96d2a4ef4d6d17e&amp;type=3#ThyroidGland&quot;);"/>
-            </ui:Toggle>
-        </ui:VisualElement>
-        <ui:VisualElement name="ComputedTomography" class="mode-container" style="display: none; flex-direction: column-reverse;">
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                <ui:DropdownField label="Axis" name="DropdownField-CTAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;"/>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
+            <ui:VisualElement name="ModeContainer" style="flex-direction: row; padding-top: 25px;">
+                <ui:Button name="Button-ModeAtlas" class="mode-button" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/Atlas.png?fileID=2800000&amp;guid=33b69f18437c8f04799dada1c62c4176&amp;type=3#Atlas&quot;); -unity-background-scale-mode: scale-to-fit;"/>
+                    <ui:Label>
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(216105971712)"/>
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button name="Button-ModeCT" class="mode-button" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/CT.png?fileID=2800000&amp;guid=82bc1ad50878ef5409a79c2ce69a975d&amp;type=3#CT&quot;); -unity-background-scale-mode: scale-to-fit;"/>
+                    <ui:Label>
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3030886608896)"/>
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button name="Button-ModeMRI" class="mode-button" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/MRI.png?fileID=2800000&amp;guid=08205dd18f48b7645a7e07e20eeec044&amp;type=3#MRI&quot;); -unity-background-scale-mode: scale-to-fit;"/>
+                    <ui:Label text="MRI">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3049832280064)"/>
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button name="Button-ModeUS" class="mode-button" style="flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Texture/US.png?fileID=2800000&amp;guid=3eccbd64204f3e444bf3859fcedcd072&amp;type=3#US&quot;); -unity-background-scale-mode: scale-to-fit;"/>
+                    <ui:Label text="US">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3061303701504)"/>
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                <ui:SliderInt label="Slice" value="0" high-value="371" show-input-field="true" name="Slider-CTSlicer" style="flex-grow: 1;"/>
+            <ui:DropdownField label="&#1056;&#1077;&#1078;&#1080;&#1084;" choices="&#1055;&#1088;&#1086;&#1089;&#1084;&#1086;&#1090;&#1088;,&#1040;&#1090;&#1083;&#1072;&#1089;,&#1050;&#1058;,&#1052;&#1056;&#1058;" index="0" name="DropdownField-Mode" style="display: none;"/>
+            <ui:VisualElement name="Atlas" class="mode-container" style="display: none;">
+                <ui:Toggle label="Skin" name="ToggleSkin">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Skin.png?fileID=2800000&amp;guid=c9cc547e522505f458c30b13fdababc4&amp;type=3#Skin&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3069679726592)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Bones" name="ToggleBones">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Bones.png?fileID=2800000&amp;guid=ce098eaabc53b75499edb63a02e30cd9&amp;type=3#Bones&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3092266053632)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Arteries" name="ToggleArteries">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Artery.png?fileID=2800000&amp;guid=bd551029cf764de43a3c5efa27649f6a&amp;type=3#Artery&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3117423489024)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Veins" name="ToggleVeins">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Vein.png?fileID=2800000&amp;guid=5aee947c0aef02247b6361ad77ab97a3&amp;type=3#Vein&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3141825949696)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Trachea" name="ToggleThrachea">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/Trachea.png?fileID=2800000&amp;guid=444c4ba10134b8d40ac87e0453c17968&amp;type=3#Trachea&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3162025717760)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Lymph nodes" name="ToggleLymphNodes">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/LymphNodes.png?fileID=2800000&amp;guid=22416270b2258234493bf01fbe0a37f4&amp;type=3#LymphNodes&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3363683659776)"/>
+                    </Bindings>
+                </ui:Toggle>
+                <ui:Toggle label="Thyroid gland" name="ToggleThyroidGland">
+                    <ui:VisualElement class="atlas-icons" style="background-image: url(&quot;project://database/Assets/Texture/ThyroidGland.png?fileID=2800000&amp;guid=84f491dc8c2cf114c96d2a4ef4d6d17e&amp;type=3#ThyroidGland&quot;);"/>
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3429228048384)"/>
+                    </Bindings>
+                </ui:Toggle>
             </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="MagneticResonanceImaging" class="mode-container" style="display: none; flex-direction: column-reverse;">
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                <ui:DropdownField label="Axis" name="DropdownField-MRIAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;"/>
+            <ui:VisualElement name="ComputedTomography" class="mode-container" style="display: none; flex-direction: column-reverse;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
+                    <ui:DropdownField label="Axis" name="DropdownField-CTAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3508139683840)"/>
+                        </Bindings>
+                    </ui:DropdownField>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
+                    <ui:SliderInt label="Slice" value="0" high-value="371" show-input-field="true" name="Slider-CTSlicer" style="flex-grow: 1;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3469556281344)"/>
+                        </Bindings>
+                    </ui:SliderInt>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                <ui:SliderInt label="Slice" value="0" high-value="179" show-input-field="true" name="Slider-MRISlicer" style="flex-grow: 1;"/>
+            <ui:VisualElement name="MagneticResonanceImaging" class="mode-container" style="display: none; flex-direction: column-reverse;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Axis.png?fileID=2800000&amp;guid=2cbe6a5e8f0a0f64ab93a5aeb73d5d0b&amp;type=3#Axis&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
+                    <ui:DropdownField label="Axis" name="DropdownField-MRIAxis" index="0" choices="Axial,Sagittal,Coronal" style="flex-grow: 1;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3508139683840)"/>
+                        </Bindings>
+                    </ui:DropdownField>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
+                    <ui:SliderInt label="Slice" value="0" high-value="179" show-input-field="true" name="Slider-MRISlicer" style="flex-grow: 1;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3469556281344)"/>
+                        </Bindings>
+                    </ui:SliderInt>
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Brightness.png?fileID=2800000&amp;guid=29cda013d3da2174382a455458b151ce&amp;type=3#Brightness&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
+                    <ui:MinMaxSlider label="Brightness filter" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px; flex-grow: 1;">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3541002055680)"/>
+                        </Bindings>
+                    </ui:MinMaxSlider>
+                </ui:VisualElement>
+                <ui:Toggle label="Brightness filter" name="BrightnessToggle" style="display: none;"/>
+                <ui:Slider label="&#1052;&#1080;&#1085;. &#1103;&#1088;&#1082;&#1086;&#1089;&#1090;&#1100;" value="-0.1" high-value="1.74" name="Slider-MinBrightness" low-value="-0.1" style="display: none;"/>
+                <ui:Slider label="&#1052;&#1072;&#1082;&#1089;. &#1103;&#1088;&#1082;&#1086;&#1089;&#1090;&#1100;" value="-0.1" high-value="1.74" name="Slider-MaxBrightness" low-value="-0.1" style="display: none;"/>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Texture/Brightness.png?fileID=2800000&amp;guid=29cda013d3da2174382a455458b151ce&amp;type=3#Brightness&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                <ui:MinMaxSlider label="Brightness filter" value="-0.1,1.74" low-limit="-0.1" high-limit="1.74" name="BrightnessSlider" style="display: flex; flex-direction: column; height: 160px; flex-grow: 1;"/>
+            <ui:VisualElement name="Ultrasound" class="mode-container" style="display: none; flex-direction: column-reverse;">
+                <ui:DropdownField label="&#1042;&#1072;&#1088;&#1080;&#1072;&#1094;&#1080;&#1103;" name="DropdownField-USAxis" index="0" choices="&#1057;&#1083;&#1077;&#1074;&#1072;,&#1062;&#1077;&#1085;&#1090;&#1088;&#1072;&#1083;&#1100;&#1085;&#1072;&#1103;,&#1057;&#1087;&#1088;&#1072;&#1074;&#1072;" style="display: none;"/>
+                <ui:SliderInt label="Slice" high-value="251" show-input-field="true" name="Slider-USSlicer">
+                    <Bindings>
+                        <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(3469556281344)"/>
+                    </Bindings>
+                </ui:SliderInt>
             </ui:VisualElement>
-            <ui:Toggle label="Brightness filter" name="BrightnessToggle" style="display: none;"/>
-            <ui:Slider label="&#1052;&#1080;&#1085;. &#1103;&#1088;&#1082;&#1086;&#1089;&#1090;&#1100;" value="-0.1" high-value="1.74" name="Slider-MinBrightness" low-value="-0.1" style="display: none;"/>
-            <ui:Slider label="&#1052;&#1072;&#1082;&#1089;. &#1103;&#1088;&#1082;&#1086;&#1089;&#1090;&#1100;" value="-0.1" high-value="1.74" name="Slider-MaxBrightness" low-value="-0.1" style="display: none;"/>
-        </ui:VisualElement>
-        <ui:VisualElement name="Ultrasound" class="mode-container" style="display: none; flex-direction: column-reverse;">
-            <ui:DropdownField label="&#1042;&#1072;&#1088;&#1080;&#1072;&#1094;&#1080;&#1103;" name="DropdownField-USAxis" index="0" choices="&#1057;&#1083;&#1077;&#1074;&#1072;,&#1062;&#1077;&#1085;&#1090;&#1088;&#1072;&#1083;&#1100;&#1085;&#1072;&#1103;,&#1057;&#1087;&#1088;&#1072;&#1074;&#1072;" style="display: none;"/>
-            <ui:SliderInt label="Slice" high-value="251" show-input-field="true" name="Slider-USSlicer"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

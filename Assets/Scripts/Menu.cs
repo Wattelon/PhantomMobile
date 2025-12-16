@@ -2,17 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UIElements;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] private List<ModeComponents> modes;
+    [SerializeField] private List<Locale> locales;
     
     private UIDocument _uiDocument;
     private DropdownField _dropdownFieldMode;
     private DropdownField _dropdownFieldCTAxis;
     private DropdownField _dropdownFieldMRIAxis;
     private DropdownField _dropdownFieldUSAxis;
+    private DropdownField _dropdownFieldLanguage;
     private SliderInt _sliderCTSlicer;
     private SliderInt _sliderMRISlicer;
     private SliderInt _sliderUSSlicer;
@@ -29,6 +33,7 @@ public class Menu : MonoBehaviour
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
     private Button _modeButtonUS;
+    private Button _buttonLanguage;
 
     private void Awake()
     {
@@ -37,6 +42,7 @@ public class Menu : MonoBehaviour
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
         _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
         _dropdownFieldUSAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-USAxis");
+        _dropdownFieldLanguage = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-Language");
         _sliderCTSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-CTSlicer");
         _sliderMRISlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-MRISlicer");
         _sliderUSSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-USSlicer");
@@ -48,6 +54,7 @@ public class Menu : MonoBehaviour
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
         _modeButtonMRI = _uiDocument.rootVisualElement.Q<Button>("Button-ModeMRI");
         _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
+        _buttonLanguage = _uiDocument.rootVisualElement.Q<Button>("Button-Language");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -72,10 +79,12 @@ public class Menu : MonoBehaviour
         _modeButtonCT.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.ComputedTomography);
         _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
+        _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
         _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
+        _dropdownFieldLanguage.RegisterValueChangedCallback(OnDropdownFieldLanguageChange);
         _sliderCTSlicer.RegisterValueChangedCallback(OnSliderChange);
         _sliderMRISlicer.RegisterValueChangedCallback(OnSliderChange);
         _sliderUSSlicer.RegisterValueChangedCallback(OnSliderChange);
@@ -117,6 +126,11 @@ public class Menu : MonoBehaviour
             mode.item.SetActive(mode.applicationMode == applicationMode);
         }
     }
+    
+    private void OnButtonLanguageClick(ClickEvent evt)
+    {
+        _dropdownFieldLanguage.style.display = _dropdownFieldLanguage.style.display ==  DisplayStyle.Flex ? DisplayStyle.None : DisplayStyle.Flex;
+    }
 
     private void OnDropdownFieldModeChange(ChangeEvent<string> evt)
     {
@@ -145,6 +159,11 @@ public class Menu : MonoBehaviour
             _slicerUS.SetAxis(_dropdownFieldUSAxis.index);
             SetSliderHighValue(_sliderUSSlicer, _slicerUS);
         }
+    }
+    
+    private void OnDropdownFieldLanguageChange(ChangeEvent<string> evt)
+    {
+        LocalizationSettings.SelectedLocale = locales[_dropdownFieldLanguage.index];
     }
     
     private void OnSliderChange(ChangeEvent<int> evt)
