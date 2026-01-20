@@ -290,6 +290,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Atlas
       objectReference: {fileID: 0}
+    - target: {fileID: 4288127397674629423, guid: 3b4b527c3d7572846998db76fe63c0e8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7468195051883533120, guid: 3b4b527c3d7572846998db76fe63c0e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -642,7 +646,7 @@ MonoBehaviour:
   m_OneHandedScaleSpeed: 0.5
   m_ThresholdMoveRatioForScale: 0.05
   m_ClampScaling: 1
-  m_MinimumScaleRatio: 0.25
+  m_MinimumScaleRatio: 1
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 1
 --- !u!1 &853127344
@@ -1218,7 +1222,7 @@ MonoBehaviour:
   m_InteractionLayers:
     m_Bits: 1
   m_DistanceCalculationMode: 1
-  m_SelectMode: 0
+  m_SelectMode: 1
   m_FocusMode: 1
   m_CustomReticle: {fileID: 0}
   m_AllowGazeInteraction: 0
@@ -1297,7 +1301,7 @@ MonoBehaviour:
   m_SmoothRotation: 0
   m_SmoothRotationAmount: 8
   m_TightenRotation: 0.1
-  m_TrackScale: 0
+  m_TrackScale: 1
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
@@ -1409,6 +1413,7 @@ GameObject:
   - component: {fileID: 7075922273444041198}
   - component: {fileID: 2050162888}
   - component: {fileID: 1956160284708139811}
+  - component: {fileID: 7651373568675356862}
   m_Layer: 0
   m_Name: UI Toolkit Grab UI
   m_TagString: Untagged
@@ -1564,7 +1569,10 @@ MonoBehaviour:
     item: {fileID: 1983177030}
   - applicationMode: 4
     item: {fileID: 1317279685}
-  locales: []
+  locales:
+  - {fileID: 11400000, guid: c879ae74cc1f7914a92fc5c0385be5cf, type: 2}
+  - {fileID: 11400000, guid: 6f799e42f5a2b0a4c890e93af8d7c4ff, type: 2}
+  - {fileID: 11400000, guid: f91c017d5ac96df47ae18dd885bcafb2, type: 2}
 --- !u!54 &7075922273444041198
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1653,6 +1661,29 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 0
+--- !u!114 &7651373568675356862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5481525149041791858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Transformers.XRGeneralGrabTransformer
+  m_PermittedDisplacementAxes: -1
+  m_ConstrainedAxisDisplacementMode: 1
+  m_TwoHandedRotationMode: 1
+  m_AllowOneHandedScaling: 0
+  m_AllowTwoHandedScaling: 1
+  m_OneHandedScaleSpeed: 0.5
+  m_ThresholdMoveRatioForScale: 0.05
+  m_ClampScaling: 1
+  m_MinimumScaleRatio: 0.5
+  m_MaximumScaleRatio: 1
+  m_ScaleMultiplier: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
