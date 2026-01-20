@@ -80,11 +80,12 @@ public class Menu : MonoBehaviour
         _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
         _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
-        _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
+        //_dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldLanguage.RegisterValueChangedCallback(OnDropdownFieldLanguageChange);
+        _dropdownFieldLanguage.index = locales.IndexOf(LocalizationSettings.SelectedLocale);
         _sliderCTSlicer.RegisterValueChangedCallback(OnSliderChange);
         _sliderMRISlicer.RegisterValueChangedCallback(OnSliderChange);
         _sliderUSSlicer.RegisterValueChangedCallback(OnSliderChange);
@@ -103,7 +104,7 @@ public class Menu : MonoBehaviour
         _modeButtonCT.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonUS.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
-        _dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
+        //_dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -129,7 +130,8 @@ public class Menu : MonoBehaviour
     
     private void OnButtonLanguageClick(ClickEvent evt)
     {
-        _dropdownFieldLanguage.style.display = _dropdownFieldLanguage.style.display ==  DisplayStyle.Flex ? DisplayStyle.None : DisplayStyle.Flex;
+        _dropdownFieldLanguage.style.visibility = _dropdownFieldLanguage.style.visibility ==  Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        _dropdownFieldLanguage.SetEnabled(_dropdownFieldLanguage.style.visibility == Visibility.Visible);
     }
 
     private void OnDropdownFieldModeChange(ChangeEvent<string> evt)
