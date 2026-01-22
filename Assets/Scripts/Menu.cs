@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class Menu : MonoBehaviour
@@ -29,6 +30,8 @@ public class Menu : MonoBehaviour
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
     private Button _modeButtonUS;
+    private Button _buttonResults;
+    private Button _buttonTest;
 
     private void Awake()
     {
@@ -48,6 +51,7 @@ public class Menu : MonoBehaviour
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
         _modeButtonMRI = _uiDocument.rootVisualElement.Q<Button>("Button-ModeMRI");
         _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
+        _buttonTest = _uiDocument.rootVisualElement.Q<Button>("Button-Test");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -72,6 +76,7 @@ public class Menu : MonoBehaviour
         _modeButtonCT.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.ComputedTomography);
         _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
+        _buttonTest.RegisterCallback<ClickEvent>(OnTestButtonClick);
         _dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -107,6 +112,11 @@ public class Menu : MonoBehaviour
             var index = i;
             _atlasToggles[i].RegisterValueChangedCallback(evt => _atlas.SetAtlasVisibility(index, evt.newValue));
         }
+    }
+
+    private void OnTestButtonClick(ClickEvent evt)
+    {
+        SceneManager.LoadScene(1);
     }
     
     private void OnModeButtonClick(ClickEvent evt, ApplicationMode applicationMode)
