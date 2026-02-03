@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using UnityEngine.Splines;
 
-public class StudySlicer : MonoBehaviour
+public class ImagingSlicer : MonoBehaviour
 {
     [SerializeField] private Axis currentAxis;
     [SerializeField][Range(0, 511)] private int currentIndex;
@@ -15,7 +15,7 @@ public class StudySlicer : MonoBehaviour
     [SerializeField] private bool filterBrightness;
     [SerializeField][Range(0, 1)] private float minBrightness;
     [SerializeField][Range(0, 1)] private float maxBrightness = 1;
-    [SerializeField] private StudySO studySO;
+    [SerializeField] private ImagingSO imagingSO;
 
     private MeshRenderer _meshRenderer;
     private Material _material;
@@ -28,16 +28,16 @@ public class StudySlicer : MonoBehaviour
     private static readonly int MinBrightnessPropertyID = Shader.PropertyToID("_MinBrightness");
     private static readonly int MaxBrightnessPropertyID = Shader.PropertyToID("_MaxBrightness");
 
-    public int TextureWidth => studySO.StudyTexture.width;
-    public int TextureHeight => studySO.StudyTexture.height;
-    public int TextureDepth => studySO.StudyTexture.depth;
+    public int TextureWidth => imagingSO.StudyTexture.width;
+    public int TextureHeight => imagingSO.StudyTexture.height;
+    public int TextureDepth => imagingSO.StudyTexture.depth;
     public Axis CurrentAxis => currentAxis;
 
     private void Awake()
     {
         var meshRenderer = GetComponent<MeshRenderer>();
         _material = new Material(meshRenderer.material);
-        _material.SetTexture(StudyTexturePropertyID, studySO.StudyTexture);
+        _material.SetTexture(StudyTexturePropertyID, imagingSO.StudyTexture);
         _axisKeywords[0] = _material.shader.keywordSpace.FindKeyword("_AXIS_AXIAL");
         _axisKeywords[1] = _material.shader.keywordSpace.FindKeyword("_AXIS_SAGITTAL");
         _axisKeywords[2] = _material.shader.keywordSpace.FindKeyword("_AXIS_CORONAL");

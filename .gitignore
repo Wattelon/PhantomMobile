@@ -13,7 +13,7 @@
 *.log
 
 .idea/
-Assets/Resources/Studies/
+Assets/Imaging
 Packages/com.ptc.vuforia.engine-11.4.4.tgz
 
 # MemoryCaptures can get excessive in size.

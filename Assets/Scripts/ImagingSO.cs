@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StudySO : ScriptableObject
+public class ImagingSO : ScriptableObject
 {
     [SerializeField] private Texture3D studyTexture;
     [SerializeField] private float rescaleSlope;

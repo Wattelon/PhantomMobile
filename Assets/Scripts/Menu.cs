@@ -26,9 +26,9 @@ public class Menu : MonoBehaviour
     private Slider _maxBrightnessSlider;
     private Toggle[] _atlasToggles;
     private Atlas _atlas;
-    private StudySlicer _slicerCT;
-    private StudySlicer _slicerMRI;
-    private StudySlicer _slicerUS;
+    private ImagingSlicer _slicerCT;
+    private ImagingSlicer _slicerMRI;
+    private ImagingSlicer _slicerUS;
     private Button _modeButtonAtlas;
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
@@ -66,11 +66,11 @@ public class Menu : MonoBehaviour
         _atlas = atlasMode.item.GetComponent<Atlas>();
         _atlasToggles = atlasMode.menu.Children().Select(atlasToggle => atlasToggle as Toggle).ToArray();
         var computedTomographyMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.ComputedTomography);
-        _slicerCT = computedTomographyMode.item.GetComponentInChildren<StudySlicer>();
+        _slicerCT = computedTomographyMode.item.GetComponentInChildren<ImagingSlicer>();
         var magneticResonanceImagingMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.MagneticResonanceImaging);
-        _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<StudySlicer>();
+        _slicerMRI = magneticResonanceImagingMode.item.GetComponentInChildren<ImagingSlicer>();
         var ultrasoundMode = modes.FirstOrDefault(mode => mode.applicationMode == ApplicationMode.Ultrasound);
-        _slicerUS = ultrasoundMode.item.GetComponentInChildren<StudySlicer>();
+        _slicerUS = ultrasoundMode.item.GetComponentInChildren<ImagingSlicer>();
     }
 
     private void OnEnable()
@@ -175,7 +175,7 @@ public class Menu : MonoBehaviour
         else if (evt.target == _sliderUSSlicer) _slicerUS.SetIndex(evt.newValue);
     }
 
-    private void SetSliderHighValue(SliderInt slider, StudySlicer slicer)
+    private void SetSliderHighValue(SliderInt slider, ImagingSlicer slicer)
     {
         int maxIndex;
         switch (slicer.CurrentAxis)
