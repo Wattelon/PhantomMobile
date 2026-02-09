@@ -20,7 +20,7 @@ public class ImagingSlicer : MonoBehaviour
     private MeshRenderer _meshRenderer;
     private Material _material;
     private SplineAnimate _splineAnimate;
-    private LocalKeyword[] _axisKeywords = new LocalKeyword[3];
+    private readonly LocalKeyword[] _axisKeywords = new LocalKeyword[3];
     private bool _isUpdateSliceDelayed;
     
     private static readonly int StudyTexturePropertyID = Shader.PropertyToID("_StudyTexture");
@@ -52,7 +52,7 @@ public class ImagingSlicer : MonoBehaviour
 
     private void UpdateSlice()
     {
-        transform.SetParent(pivotPoints[(int)currentAxis], false);
+        /*transform.SetParent(pivotPoints[(int)currentAxis], false);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
@@ -76,37 +76,37 @@ public class ImagingSlicer : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
         if (moveAlongSpline) _splineAnimate.NormalizedTime = (float)currentIndex / TextureDepth;
-        else transform.localPosition = Vector3.forward * (currentIndex * step);
+        else transform.localPosition = Vector3.forward * (currentIndex * step);*/
         
-        /*switch (currentAxis)
+        switch (currentAxis)
         {
             case Axis.Axial:
-                transform.localRotation = Quaternion.LookRotation(Vector3.Cross(studySO.OrientationVectorX, studySO.OrientationVectorY), studySO.OrientationVectorY);
-                transform.localPosition = transform.forward * ((-0.5f * TextureDepth + currentIndex) * studySO.SliceThickness / 1000);
-                transform.localScale = new Vector3(studySO.PixelSpacingColumn * TextureWidth / 1000, studySO.PixelSpacingRow * TextureHeight / 1000, 1);
+                transform.localRotation = Quaternion.LookRotation(Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY), imagingSO.OrientationVectorY);
+                transform.localPosition = transform.forward * ((-0.5f * TextureDepth + currentIndex) * imagingSO.SpacingBetweenSlices / 1000);
+                transform.localScale = new Vector3(imagingSO.PixelSpacingColumn * TextureWidth / 1000, imagingSO.PixelSpacingRow * TextureHeight / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureDepth);
                 break;
             case Axis.Sagittal:
-                transform.localRotation = Quaternion.LookRotation(studySO.OrientationVectorX, Vector3.Cross(studySO.OrientationVectorX, studySO.OrientationVectorY));
-                transform.localPosition = transform.forward * ((-0.5f * TextureWidth + currentIndex) * studySO.PixelSpacingColumn / 1000);
-                transform.localScale = new Vector3(studySO.SliceThickness * TextureDepth / 1000, studySO.PixelSpacingRow * TextureHeight / 1000, 1);
+                transform.localRotation = Quaternion.LookRotation(imagingSO.OrientationVectorX, Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY));
+                transform.localPosition = transform.forward * ((-0.5f * TextureWidth + currentIndex) * imagingSO.PixelSpacingColumn / 1000);
+                transform.localScale = new Vector3(imagingSO.SpacingBetweenSlices * TextureDepth / 1000, imagingSO.PixelSpacingRow * TextureHeight / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureWidth);
                 break;
             case Axis.Coronal:
-                transform.localRotation = Quaternion.LookRotation(studySO.OrientationVectorY, Vector3.Cross(studySO.OrientationVectorX, studySO.OrientationVectorY));
-                transform.localPosition = transform.forward * ((-0.5f * TextureHeight + currentIndex) * studySO.PixelSpacingRow / 1000);
-                transform.localScale = new Vector3(studySO.PixelSpacingColumn * TextureWidth / 1000, studySO.SliceThickness * TextureDepth / 1000, 1);
+                transform.localRotation = Quaternion.LookRotation(imagingSO.OrientationVectorY, Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY));
+                transform.localPosition = transform.forward * ((-0.5f * TextureHeight + currentIndex) * imagingSO.PixelSpacingRow / 1000);
+                transform.localScale = new Vector3(imagingSO.PixelSpacingColumn * TextureWidth / 1000, imagingSO.SpacingBetweenSlices * TextureDepth / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureHeight);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
-        }*/
+        }
     }
 
     public void SetAxis(int axis)
     {
         currentAxis = (Axis)axis;
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
             _material.SetKeyword(_axisKeywords[i], i == axis);
         }
