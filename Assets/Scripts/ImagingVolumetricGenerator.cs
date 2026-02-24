@@ -159,7 +159,11 @@ public static class ImagingVolumetricGenerator
     
     private static void CreateAssets()
     {
-        _studyTexture = new Texture3D(_width, _height, _depth, TextureFormat.Alpha8, false);
+        _studyTexture = new Texture3D(_width, _height, _depth, TextureFormat.Alpha8, false)
+        {
+            wrapMode = TextureWrapMode.Clamp,
+            filterMode = FilterMode.Trilinear
+        };
         _studyTexture.SetPixels(_colors);
         _studyTexture.Apply();
         var imagingSO = ScriptableObject.CreateInstance<ImagingSO>();
