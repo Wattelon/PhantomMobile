@@ -3,7 +3,7 @@ Shader "Custom/VolumeShader"
     Properties
     {
         [MainTexture] _BaseMap("Base Map", 3D) = "white" {}
-        _Alpha ("Alpha", Range(0, 2)) = 1.0
+        _Alpha ("Alpha", Range(0, 1)) = 1.0
         _AlphaThreshold ("Alpha Threshold", Range(0, 1)) = 0.1
         _StepSize ("Step Size", Range(0.001, 0.01)) = 0.005
     }

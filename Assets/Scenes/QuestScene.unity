@@ -392,6 +392,7 @@ Transform:
   - {fileID: 225549306}
   - {fileID: 1983177029}
   - {fileID: 1317279684}
+  - {fileID: 1403751016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &710208503
@@ -1035,6 +1036,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1403751015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4595178928329721439, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+  m_PrefabInstance: {fileID: 1737860514514400514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1403751016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+  m_PrefabInstance: {fileID: 1737860514514400514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1949500439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1188,7 @@ PrefabInstance:
     - target: {fileID: 9204503952579848121, guid: 152879cb0128aa04197b2358fd58e072, type: 3}
       propertyPath: imagingSO
       value: 
-      objectReference: {fileID: 11400000, guid: bee91bf8d50430044b48daee116a2dfd, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1216,6 +1227,67 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1737860514514400514
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 710208502}
+    m_Modifications:
+    - target: {fileID: 4595178928329721439, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_Name
+      value: VolumeRendering
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595178928329721439, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148379922078109480, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c0c5eeae8f91b5b4093f83f94200f6c3, type: 3}
 --- !u!114 &1956160284708139811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1581,6 +1653,8 @@ MonoBehaviour:
     item: {fileID: 1983177030}
   - applicationMode: 4
     item: {fileID: 1317279685}
+  - applicationMode: 5
+    item: {fileID: 1403751015}
   locales:
   - {fileID: 11400000, guid: c879ae74cc1f7914a92fc5c0385be5cf, type: 2}
   - {fileID: 11400000, guid: 6f799e42f5a2b0a4c890e93af8d7c4ff, type: 2}

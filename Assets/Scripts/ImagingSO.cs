@@ -12,6 +12,7 @@ public class ImagingSO : ScriptableObject
     [SerializeField] private float pixelSpacingColumn;
     [SerializeField] private Vector3 orientationVectorX;
     [SerializeField] private Vector3 orientationVectorY;
+    [SerializeField] private Vector3 scalingVector;
     
     public Texture3D StudyTexture => studyTexture;
     public float RescaleSlope => rescaleSlope;
@@ -22,8 +23,9 @@ public class ImagingSO : ScriptableObject
     public string Modality => modality;
     public Vector3 OrientationVectorX => orientationVectorX;
     public Vector3 OrientationVectorY => orientationVectorY;
+    public Vector3 ScalingVector => scalingVector;
 
-    public void Initialize(string seriesUID, Texture3D studyTexture, float rescaleSlope, float rescaleIntercept,  float spacingBetweenSlices, float pixelSpacingRow, float pixelSpacingColumn, string modality, Vector3 orientationVectorX, Vector3 orientationVectorY)
+    public void Initialize(string seriesUID, Texture3D studyTexture, float rescaleSlope, float rescaleIntercept,  float spacingBetweenSlices, float pixelSpacingRow, float pixelSpacingColumn, string modality, Vector3 orientationVectorX, Vector3 orientationVectorY, Vector3 scalingVector)
     {
         this.seriesUID = seriesUID;
         this.studyTexture = studyTexture;
@@ -35,5 +37,6 @@ public class ImagingSO : ScriptableObject
         this.modality = modality;
         this.orientationVectorX = orientationVectorX;
         this.orientationVectorY = orientationVectorY;
+        this.scalingVector = scalingVector;
     }
 }

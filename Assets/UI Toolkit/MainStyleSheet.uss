@@ -63,3 +63,13 @@ Toggle {
     flex-grow: 1;
     width: 100px;
 }
+
+Slider #unity-dragger {
+    height: 50px;
+    top: 37%;
+    width: 40px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}

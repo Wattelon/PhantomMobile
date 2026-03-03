@@ -29,7 +29,7 @@ public static class ImagingVolumetricGenerator
     private static string _instanceCreationTime;
     private static Vector3 _orientationVectorX;
     private static Vector3 _orientationVectorY;
-    private static Vector3 _orientationVectorZ;
+    private static Vector3 _scalingVector;
     private static bool _isMultiFrame;
     private static bool _isDateTimeMissing;
     private static bool _hasFunctionalGroup;
@@ -128,6 +128,8 @@ public static class ImagingVolumetricGenerator
         _pixelSpacingColumn = (float)pixelSpacing[1];
         _orientationVectorX = new Vector3(-orientationMatrix[0],  -orientationMatrix[1], orientationMatrix[2]);
         _orientationVectorY = new Vector3(-orientationMatrix[3],  -orientationMatrix[4], orientationMatrix[5]);
+        _scalingVector = new Vector3(_width * _pixelSpacingColumn, _height * _pixelSpacingRow, _depth * _spacingBetweenSlices);
+        _scalingVector /= Mathf.Max(_scalingVector.x, _scalingVector.y, _scalingVector.z);
     }
     
     private static void SortSlices()
@@ -167,7 +169,7 @@ public static class ImagingVolumetricGenerator
         _studyTexture.SetPixels(_colors);
         _studyTexture.Apply();
         var imagingSO = ScriptableObject.CreateInstance<ImagingSO>();
-        imagingSO.Initialize(_seriesUID, _studyTexture, _rescaleSlope, _rescaleIntercept, _spacingBetweenSlices, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY);
+        imagingSO.Initialize(_seriesUID, _studyTexture, _rescaleSlope, _rescaleIntercept, _spacingBetweenSlices, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY, _scalingVector);
         
         var filename = $"Assets/Imaging/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}{(_isDateTimeMissing ? $"_{_seriesUID}" : "")}";
         if (!AssetDatabase.IsValidFolder("Assets/Imaging")) AssetDatabase.CreateFolder("Assets", "Imaging");

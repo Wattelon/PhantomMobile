@@ -86,6 +86,30 @@ MonoBehaviour:
     m_Localized: Coronal
     m_Metadata:
       m_Items: []
+  - m_Id: 28268894219890688
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28325809083871232
+    m_Localized: Alfa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28325923865194496
+    m_Localized: Limiar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28326065376817152
+    m_Localized: Passo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28337754218393600
+    m_Localized: Arquivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28337793846177792
+    m_Localized: Carregar
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

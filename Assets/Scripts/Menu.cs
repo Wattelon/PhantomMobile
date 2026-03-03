@@ -12,7 +12,6 @@ public class Menu : MonoBehaviour
     [SerializeField] private List<Locale> locales;
     
     private UIDocument _uiDocument;
-    private DropdownField _dropdownFieldMode;
     private DropdownField _dropdownFieldCTAxis;
     private DropdownField _dropdownFieldMRIAxis;
     private DropdownField _dropdownFieldUSAxis;
@@ -20,10 +19,10 @@ public class Menu : MonoBehaviour
     private SliderInt _sliderCTSlicer;
     private SliderInt _sliderMRISlicer;
     private SliderInt _sliderUSSlicer;
-    private Toggle _brightnessToggle;
+    private Slider _sliderVolumeAlphaThreshold;
+    private Slider _sliderVolumeAlpha;
+    private Slider _sliderVolumeStepSize;
     private MinMaxSlider _brightnessSlider;
-    private Slider _minBrightnessSlider;
-    private Slider _maxBrightnessSlider;
     private Toggle[] _atlasToggles;
     private Atlas _atlas;
     private ImagingSlicer _slicerCT;
@@ -33,12 +32,18 @@ public class Menu : MonoBehaviour
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
     private Button _modeButtonUS;
+    private Button _modeButtonVolume;
+    private Button _buttonVolumeLibrary;
+    private Button _buttonVolumeLoad;
     private Button _buttonLanguage;
+
+    public static Action<float> VolumeAlphaChanged;
+    public static Action<float> VolumeAlphaThresholdChanged;
+    public static Action<float> VolumeStepSizeChanged;
 
     private void Awake()
     {
         _uiDocument = GetComponent<UIDocument>();
-        _dropdownFieldMode = _uiDocument.rootVisualElement.Q<DropdownField>();
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
         _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
         _dropdownFieldUSAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-USAxis");
@@ -46,14 +51,15 @@ public class Menu : MonoBehaviour
         _sliderCTSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-CTSlicer");
         _sliderMRISlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-MRISlicer");
         _sliderUSSlicer = _uiDocument.rootVisualElement.Q<SliderInt>("Slider-USSlicer");
-        _brightnessToggle = _uiDocument.rootVisualElement.Q<Toggle>("BrightnessToggle");
+        _sliderVolumeAlpha = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeAlpha");
+        _sliderVolumeAlphaThreshold = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeAlphaThreshold");
+        _sliderVolumeStepSize = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeStepSize");
         _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
-        _minBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MinBrightness");
-        _maxBrightnessSlider = _uiDocument.rootVisualElement.Q<Slider>("Slider-MaxBrightness");
         _modeButtonAtlas = _uiDocument.rootVisualElement.Q<Button>("Button-ModeAtlas");
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
         _modeButtonMRI = _uiDocument.rootVisualElement.Q<Button>("Button-ModeMRI");
         _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
+        _modeButtonVolume = _uiDocument.rootVisualElement.Q<Button>("Button-ModeVolume");
         _buttonLanguage = _uiDocument.rootVisualElement.Q<Button>("Button-Language");
         for (var i = 0; i < modes.Count; i++)
         {
@@ -79,17 +85,19 @@ public class Menu : MonoBehaviour
         _modeButtonCT.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.ComputedTomography);
         _modeButtonMRI.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.MagneticResonanceImaging);
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
+        _modeButtonVolume.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.VolumeRendering);
         _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
-        //_dropdownFieldMode.RegisterValueChangedCallback(OnDropdownFieldModeChange);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldLanguage.RegisterValueChangedCallback(OnDropdownFieldLanguageChange);
         _dropdownFieldLanguage.index = locales.IndexOf(LocalizationSettings.SelectedLocale);
-        _sliderCTSlicer.RegisterValueChangedCallback(OnSliderChange);
-        _sliderMRISlicer.RegisterValueChangedCallback(OnSliderChange);
-        _sliderUSSlicer.RegisterValueChangedCallback(OnSliderChange);
-        //_brightnessToggle.RegisterValueChangedCallback(OnBrightnessToggle);
+        _sliderCTSlicer.RegisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderMRISlicer.RegisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderUSSlicer.RegisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderVolumeAlpha.RegisterValueChangedCallback(OnVolumeSliderChange);
+        _sliderVolumeAlphaThreshold.RegisterValueChangedCallback(OnVolumeSliderChange);
+        _sliderVolumeStepSize.RegisterValueChangedCallback(OnVolumeSliderChange);
         _brightnessSlider.RegisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
         {
@@ -104,13 +112,17 @@ public class Menu : MonoBehaviour
         _modeButtonCT.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonUS.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
-        //_dropdownFieldMode.UnregisterValueChangedCallback(OnDropdownFieldModeChange);
+        _buttonLanguage.UnregisterCallback<ClickEvent>(OnButtonLanguageClick);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
-        _sliderCTSlicer.UnregisterValueChangedCallback(OnSliderChange);
-        _sliderMRISlicer.UnregisterValueChangedCallback(OnSliderChange);
-        _sliderUSSlicer.UnregisterValueChangedCallback(OnSliderChange);
+        _dropdownFieldLanguage.UnregisterValueChangedCallback(OnDropdownFieldLanguageChange);
+        _sliderCTSlicer.UnregisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderMRISlicer.UnregisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderUSSlicer.UnregisterValueChangedCallback(OnSlicerSliderChange);
+        _sliderVolumeAlpha.UnregisterValueChangedCallback(OnVolumeSliderChange);
+        _sliderVolumeAlphaThreshold.UnregisterValueChangedCallback(OnVolumeSliderChange);
+        _sliderVolumeStepSize.UnregisterValueChangedCallback(OnVolumeSliderChange);
         _brightnessSlider.UnregisterValueChangedCallback(OnBrightnessSliderChange);
         for (var i = 0; i < _atlasToggles.Length; i++)
         {
@@ -132,16 +144,6 @@ public class Menu : MonoBehaviour
     {
         _dropdownFieldLanguage.style.visibility = _dropdownFieldLanguage.style.visibility ==  Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
         _dropdownFieldLanguage.SetEnabled(_dropdownFieldLanguage.style.visibility == Visibility.Visible);
-    }
-
-    private void OnDropdownFieldModeChange(ChangeEvent<string> evt)
-    {
-        var applicationMode = (ApplicationMode)_dropdownFieldMode.index;
-        foreach (var mode in modes)
-        {
-            mode.menu.style.display = mode.applicationMode == applicationMode ? DisplayStyle.Flex : DisplayStyle.None;
-            mode.item.SetActive(mode.applicationMode == applicationMode);
-        }
     }
     
     private void OnDropdownFieldAxisChange(ChangeEvent<string> evt)
@@ -168,7 +170,7 @@ public class Menu : MonoBehaviour
         LocalizationSettings.SelectedLocale = locales[_dropdownFieldLanguage.index];
     }
     
-    private void OnSliderChange(ChangeEvent<int> evt)
+    private void OnSlicerSliderChange(ChangeEvent<int> evt)
     {
         if (evt.target == _sliderCTSlicer) _slicerCT.SetIndex(evt.newValue);
         else if (evt.target == _sliderMRISlicer) _slicerMRI.SetIndex(evt.newValue);
@@ -196,9 +198,11 @@ public class Menu : MonoBehaviour
         slider.highValue = maxIndex;
     }
     
-    private void OnBrightnessToggle(ChangeEvent<bool> evt)
+    private void OnVolumeSliderChange(ChangeEvent<float> evt)
     {
-        _slicerMRI.SetBrightnessFilter(evt.newValue);
+        if (evt.target == _sliderVolumeAlpha) VolumeAlphaChanged.Invoke(evt.newValue);
+        else if (evt.target == _sliderVolumeAlphaThreshold) VolumeAlphaThresholdChanged.Invoke(evt.newValue);
+        else if (evt.target == _sliderVolumeStepSize) VolumeStepSizeChanged.Invoke(evt.newValue);
     }
     
     private void OnBrightnessSliderChange(ChangeEvent<Vector2> evt)
@@ -221,7 +225,8 @@ public enum ApplicationMode
     Atlas,
     ComputedTomography,
     MagneticResonanceImaging,
-    Ultrasound
+    Ultrasound,
+    VolumeRendering
 }
 
 [Serializable]
