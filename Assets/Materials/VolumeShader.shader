@@ -3,8 +3,9 @@ Shader "Custom/VolumeShader"
     Properties
     {
         [MainTexture] _BaseMap("Base Map", 3D) = "white" {}
-        _Alpha ("Alpha", Range(0, 1)) = 1.0
-        _StepSize ("Step Size", Range(0.001, 0.1)) = 0.005
+        _Alpha ("Alpha", Range(0, 2)) = 1.0
+        _AlphaThreshold ("Alpha Threshold", Range(0, 1)) = 0.1
+        _StepSize ("Step Size", Range(0.001, 0.01)) = 0.005
     }
 
     SubShader
@@ -40,6 +41,7 @@ Shader "Custom/VolumeShader"
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
                 float _Alpha;
+                float _AlphaThreshold;
                 float _StepSize;
             CBUFFER_END
 
@@ -82,12 +84,15 @@ Shader "Custom/VolumeShader"
                     float3 uv = camPosOS + t * rayDirOS + 0.5;
                     float4 sample = SAMPLE_TEXTURE3D(_BaseMap, sampler_BaseMap, uv);
 
-                    sample.rgb = sample.a;
-                    sample.a *= _Alpha;
+                    if (sample.a >= _AlphaThreshold)
+                    {
+                        sample.rgb = sample.a;
+                        sample.a *= _Alpha;
 
-                    accumulatedColor.rgb += (1.0 - accumulatedColor.a) * sample.rgb * sample.a;
-                    accumulatedColor.a += (1.0 - accumulatedColor.a) * sample.a;
-
+                        accumulatedColor.rgb += (1.0 - accumulatedColor.a) * sample.rgb * sample.a;
+                        accumulatedColor.a += (1.0 - accumulatedColor.a) * sample.a;
+                    }
+                    
                     t += _StepSize;
                     if (t > tFar) break;
                 }
