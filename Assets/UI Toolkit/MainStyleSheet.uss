@@ -36,7 +36,7 @@ MinMaxSlider #unity-dragger VisualElement {
     padding-left: 0;
 }
 
-#unity-checkmark {
+#Atlas #unity-checkmark {
     width: 36px;
     height: 36px;
     margin-top: 10px;
@@ -73,3 +73,7 @@ Slider #unity-dragger {
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
 }
+
+
+
+

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -12,6 +13,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private List<Locale> locales;
     
     private UIDocument _uiDocument;
+    private VisualElement _volumeArchive;
     private DropdownField _dropdownFieldCTAxis;
     private DropdownField _dropdownFieldMRIAxis;
     private DropdownField _dropdownFieldUSAxis;
@@ -28,22 +30,26 @@ public class Menu : MonoBehaviour
     private ImagingSlicer _slicerCT;
     private ImagingSlicer _slicerMRI;
     private ImagingSlicer _slicerUS;
+    private RadioButtonGroup _radioButtonGroupVolumeArchive;
     private Button _modeButtonAtlas;
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
     private Button _modeButtonUS;
     private Button _modeButtonVolume;
-    private Button _buttonVolumeLibrary;
+    private Button _buttonVolumeArchive;
+    private Button _buttonVolumeChoose;
     private Button _buttonVolumeLoad;
     private Button _buttonLanguage;
 
     public static Action<float> VolumeAlphaChanged;
     public static Action<float> VolumeAlphaThresholdChanged;
     public static Action<float> VolumeStepSizeChanged;
+    public static Action<string> VolumeChanged;
 
     private void Awake()
     {
         _uiDocument = GetComponent<UIDocument>();
+        _volumeArchive = _uiDocument.rootVisualElement.Q<VisualElement>("VolumeArchive");
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
         _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
         _dropdownFieldUSAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-USAxis");
@@ -54,6 +60,7 @@ public class Menu : MonoBehaviour
         _sliderVolumeAlpha = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeAlpha");
         _sliderVolumeAlphaThreshold = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeAlphaThreshold");
         _sliderVolumeStepSize = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeStepSize");
+        _radioButtonGroupVolumeArchive =  _uiDocument.rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroup-VolumeArchive");
         _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
         _modeButtonAtlas = _uiDocument.rootVisualElement.Q<Button>("Button-ModeAtlas");
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
@@ -61,6 +68,9 @@ public class Menu : MonoBehaviour
         _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
         _modeButtonVolume = _uiDocument.rootVisualElement.Q<Button>("Button-ModeVolume");
         _buttonLanguage = _uiDocument.rootVisualElement.Q<Button>("Button-Language");
+        _buttonVolumeArchive = _uiDocument.rootVisualElement.Q<Button>("Button-VolumeArchive");
+        _buttonVolumeChoose =  _uiDocument.rootVisualElement.Q<Button>("Button-VolumeChoose");
+        _buttonVolumeLoad = _uiDocument.rootVisualElement.Q<Button>("Button-VolumeLoad");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -87,6 +97,8 @@ public class Menu : MonoBehaviour
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
         _modeButtonVolume.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.VolumeRendering);
         _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
+        _buttonVolumeArchive.RegisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
+        _buttonVolumeChoose.RegisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -113,6 +125,8 @@ public class Menu : MonoBehaviour
         _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonUS.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _buttonLanguage.UnregisterCallback<ClickEvent>(OnButtonLanguageClick);
+        _buttonVolumeArchive.UnregisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
+        _buttonVolumeChoose.UnregisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -144,6 +158,25 @@ public class Menu : MonoBehaviour
     {
         _dropdownFieldLanguage.style.visibility = _dropdownFieldLanguage.style.visibility ==  Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
         _dropdownFieldLanguage.SetEnabled(_dropdownFieldLanguage.style.visibility == Visibility.Visible);
+    }
+
+    private void OnButtonVolumeArchiveClick(ClickEvent evt)
+    {
+        var files = Directory.GetFiles(Application.persistentDataPath, "*.json",  SearchOption.AllDirectories);
+        _radioButtonGroupVolumeArchive.choices = files.Select(Path.GetFileNameWithoutExtension).ToArray();
+        _volumeArchive.style.display = DisplayStyle.Flex;
+    }
+
+    private void OnButtonVolumeChooseClick(ClickEvent evt)
+    {
+        VolumeChanged?.Invoke(_radioButtonGroupVolumeArchive.choices.ElementAt(_radioButtonGroupVolumeArchive.value));
+        _radioButtonGroupVolumeArchive.Clear();
+        _volumeArchive.style.display = DisplayStyle.None;
+    }
+
+    private void OnButtonVolumeLoadClick(ClickEvent evt)
+    {
+        
     }
     
     private void OnDropdownFieldAxisChange(ChangeEvent<string> evt)

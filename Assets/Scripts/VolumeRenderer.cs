@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class VolumeRenderer : MonoBehaviour
@@ -14,6 +16,7 @@ public class VolumeRenderer : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         _material = _renderer.material;
+        _imagingSO = ScriptableObject.CreateInstance<ImagingSO>();
     }
 
     private void OnEnable()
@@ -21,6 +24,7 @@ public class VolumeRenderer : MonoBehaviour
         Menu.VolumeAlphaChanged += OnVolumeAlphaChanged;
         Menu.VolumeAlphaThresholdChanged += OnVolumeAlphaThresholdChanged;
         Menu.VolumeStepSizeChanged += OnVolumeStepSizeChanged;
+        Menu.VolumeChanged += OnVolumeChanged;
     }
 
     private void OnDisable()
@@ -28,6 +32,7 @@ public class VolumeRenderer : MonoBehaviour
         Menu.VolumeAlphaChanged -= OnVolumeAlphaChanged;
         Menu.VolumeAlphaThresholdChanged -= OnVolumeAlphaThresholdChanged;
         Menu.VolumeStepSizeChanged -= OnVolumeStepSizeChanged;
+        Menu.VolumeChanged -= OnVolumeChanged;
     }
 
     private void OnVolumeAlphaChanged(float alpha)
@@ -45,10 +50,20 @@ public class VolumeRenderer : MonoBehaviour
         _material.SetFloat(StepSize, stepSize);
     }
 
-    private void OnVolumeChanged(ImagingSO imagingSO)
+    private void OnVolumeChanged(string volumeName)
     {
-        _imagingSO = imagingSO;
-        _material.mainTexture = imagingSO.StudyTexture;
-        transform.localScale = imagingSO.ScalingVector;
+        var json = File.ReadAllText($"{Application.persistentDataPath}/{volumeName}.json");
+        json = JsonCompressor.Decompress(json);
+        JsonUtility.FromJsonOverwrite(json, _imagingSO);
+        var texture = new Texture3D(_imagingSO.Width, _imagingSO.Height, _imagingSO.Depth, TextureFormat.Alpha8, false)
+        {
+            wrapMode = TextureWrapMode.Clamp,
+            filterMode = FilterMode.Trilinear
+        };
+        texture.SetPixels32(_imagingSO.Pixels.Select(pixel => new Color32(0, 0, 0, pixel)).ToArray());
+        texture.Apply();
+        
+        _material.mainTexture = texture;
+        transform.localScale = _imagingSO.ScalingVector;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using FellowOakDicom;
 using FellowOakDicom.Imaging;
 using UnityEditor;
+using Color32 = UnityEngine.Color32;
 
 public static class ImagingVolumetricGenerator
 {
@@ -13,7 +14,8 @@ public static class ImagingVolumetricGenerator
     private static Dictionary<string, List<DicomDataset>> _dicomSeries;
     private static DicomDataset _dicomDataset;
     private static DicomDataset _functionalGroupValues;
-    private static Color[] _colors;
+    private static Color32[] _colors;
+    private static byte[] _pixels;
     private static int _width;
     private static int _height;
     private static int _depth;
@@ -84,7 +86,8 @@ public static class ImagingVolumetricGenerator
         _width = pixelData.Width;
         _height = pixelData.Height;
         _depth = _isMultiFrame ? numberOfFrames : _dicomDatasets.Count;
-        _colors = new Color[_width * _height * _depth];
+        _colors = new Color32[_width * _height * _depth];
+        _pixels = new byte[_width * _height * _depth];
     }
 
     private static void GetTags()
@@ -153,7 +156,9 @@ public static class ImagingVolumetricGenerator
                 
                 for (var x = 0; x < _width; x++)
                 {
-                    _colors[x + yOffset + zOffset] = new Color(0, 0, 0, image.GetPixel(x, y).R / 255f);
+                    var pixel = image.GetPixel(x, y).R;
+                    _pixels[x + yOffset + zOffset] = pixel;
+                    _colors[x + yOffset + zOffset] = new Color32(0, 0, 0, image.GetPixel(x, y).R);
                 }
             }
         }
@@ -166,16 +171,21 @@ public static class ImagingVolumetricGenerator
             wrapMode = TextureWrapMode.Clamp,
             filterMode = FilterMode.Trilinear
         };
-        _studyTexture.SetPixels(_colors);
+        _studyTexture.SetPixels32(_colors);
         _studyTexture.Apply();
         var imagingSO = ScriptableObject.CreateInstance<ImagingSO>();
-        imagingSO.Initialize(_seriesUID, _studyTexture, _rescaleSlope, _rescaleIntercept, _spacingBetweenSlices, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY, _scalingVector);
+        imagingSO.Initialize(_seriesUID, _studyTexture, _pixels, _width, _height, _depth, _rescaleSlope, _rescaleIntercept, _spacingBetweenSlices, _pixelSpacingRow, _pixelSpacingColumn, _modality, _orientationVectorX, _orientationVectorY, _scalingVector);
         
-        var filename = $"Assets/Imaging/{_modality}/{_modality}_{_instanceCreationDate}_{_instanceCreationTime}{(_isDateTimeMissing ? $"_{_seriesUID}" : "")}";
+        var identifier = _isDateTimeMissing ? _seriesUID : $"{_instanceCreationDate}_{_instanceCreationTime}";
+        var filename = $"{_modality}_{identifier}";
+        var json = JsonUtility.ToJson(imagingSO);
+        json = JsonCompressor.Compress(json);
+        File.WriteAllText($"{Application.persistentDataPath}/{filename}.json", json);
+        
         if (!AssetDatabase.IsValidFolder("Assets/Imaging")) AssetDatabase.CreateFolder("Assets", "Imaging");
         if (!AssetDatabase.IsValidFolder($"Assets/Imaging/{_modality}")) AssetDatabase.CreateFolder("Assets/Imaging", _modality);
-        AssetDatabase.CreateAsset(_studyTexture, $"{filename}.asset");
-        AssetDatabase.CreateAsset(imagingSO, $"{filename}_SO.asset");
+        //AssetDatabase.CreateAsset(_studyTexture, $"Assets/Imaging/{_modality}/{filename}.asset");
+        //AssetDatabase.CreateAsset(imagingSO, $"Assets/Imaging/{_modality}/{filename}_SO.asset");
     }
 }
 #endif
