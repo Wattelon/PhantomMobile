@@ -188,6 +188,19 @@
         <ui:ScrollView horizontal-scroller-visibility="Hidden">
             <ui:RadioButtonGroup label="Архив исследований" name="RadioButtonGroup-VolumeArchive" choices="" style="flex-direction: column; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         </ui:ScrollView>
-        <ui:Button text="Выбрать" name="Button-VolumeChoose" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
+            <ui:Button text="Выбрать" name="Button-VolumeChoose" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; flex-grow: 1;"/>
+            <ui:Button text="Отмена" name="Button-VolumeCancel" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; flex-grow: 1;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="VolumeLoad" style="flex-grow: 1; position: absolute; top: 10%; right: 2%; bottom: 2%; left: 2%; background-color: rgb(150, 150, 150); justify-content: space-between; padding-top: 25px; padding-right: 25px; padding-bottom: 25px; padding-left: 25px; display: none;">
+        <ui:ScrollView horizontal-scroller-visibility="Hidden">
+            <ui:RadioButtonGroup label="Выберите папку для загрузки" name="RadioButtonGroup-VolumeLoad" choices="" style="flex-direction: column; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        </ui:ScrollView>
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
+            <ui:Button text="Открыть" name="Button-FolderOpen" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; flex-grow: 1;"/>
+            <ui:Button text="Загрузить" name="Button-FolderLoad" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; flex-grow: 1;"/>
+            <ui:Button text="Отмена" name="Button-FolderCancel" style="margin-top: 2px; margin-right: 4px; margin-bottom: 2px; margin-left: 4px; flex-grow: 1;"/>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

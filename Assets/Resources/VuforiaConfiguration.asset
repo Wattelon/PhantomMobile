@@ -15,7 +15,7 @@ MonoBehaviour:
   vuforia:
     vuforiaLicenseKey: ARqog1r/////AAABmeTvT4oNvE46tvmS8jjHAJ4qEg9cIfkrKdr5KOCddCHzqkyu9tHm0qeVZOokaPcT2LP21zH0FX1lRONHDd3NTYoqWkZjz1Udb0oYpDJB9Deos8LWlgLJjM4mSr0VEPpnNMqwIQgOH1rgUmu4dqzG2M7z4YdWIHpTJbI51n27bYTDLORrbyKZtah3kluO6G03zLFV/pp9THfQbiLuMCeIhjMVEcTu73ofoPSMwR6wqTY/ZgndB0KMM8d89wxEF+k83nCn30b+RhGnMY+hRt7UKfL/E49yLxhaPWf0V9OhWCnr5alnZ0OTfyjcFfiuJQ9oBBcjT0H6MIz6tOs9cqQnCgZGszrZQbx8AugTQwgQEEEL
     ufoLicenseKey: QWNVcW9rWC8vLy8vQUFBQUtDQmdweitEaGtlcG1lcXFDV1RsQmpBNmxxR1JuWmhyMGVSVkRaK2VWTTZGZXJzZ1R0RTNKTklGOWdUUEJBMEpmOC9QSHA0RCs5NUFWNG1xODBtZTd6S1FtQnYzRkJOeDR4RDllck5nbytNOGZQWitFNENuNTRvTHRMQzhHS2gwK0tvdEVCRUhUTDhEQVRlRE8vWldhNmMrYXk5ZE1xb0pkSmYzeXRsakVJbGdMNnIvNDRRMDV0ZHhTcytNVVZKRkJuSUdQZEc5dHNpTEJmNWkvM1lhajFFdUpXaFZKUzZZeWE4UmtJbHIwODdFSzgrS0I4azlWSXNWZkQzTkxZcDVGK01jT01sQUZ1alZzdzc4a2JTU3VOQ1VoQlYrSWJRUHlUbnJKUEY0UG85Z1QwaitKbkxHNUZoczBXREpORURYV3lQRVArTlpJV2xsUXdZd0t4bVBjeEx2OHo2SUtiNmQ3bnFGU3NDcS8vdUw=
-    delayedInitialization: 1
+    delayedInitialization: 0
     cameraFocusModeSetting: 2
     cameraDeviceModeSetting: -3
     maxSimultaneousImageTargets: 1
@@ -44,7 +44,7 @@ MonoBehaviour:
     autoStartTracker: 1
     arcoreRequirement: 1
     autoImportArcore: 1
-    thirdPartyARCoreClientDetected: 0
+    thirdPartyARCoreClientDetected: 1
   playmode:
     mRecordingPath: 
     playModeType: 0

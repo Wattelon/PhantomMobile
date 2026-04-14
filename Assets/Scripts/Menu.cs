@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     
     private UIDocument _uiDocument;
     private VisualElement _volumeArchive;
+    private VisualElement _volumeLoad;
     private DropdownField _dropdownFieldCTAxis;
     private DropdownField _dropdownFieldMRIAxis;
     private DropdownField _dropdownFieldUSAxis;
@@ -31,6 +32,7 @@ public class Menu : MonoBehaviour
     private ImagingSlicer _slicerMRI;
     private ImagingSlicer _slicerUS;
     private RadioButtonGroup _radioButtonGroupVolumeArchive;
+    private RadioButtonGroup _radioButtonGroupVolumeLoad;
     private Button _modeButtonAtlas;
     private Button _modeButtonCT;
     private Button _modeButtonMRI;
@@ -38,7 +40,11 @@ public class Menu : MonoBehaviour
     private Button _modeButtonVolume;
     private Button _buttonVolumeArchive;
     private Button _buttonVolumeChoose;
+    private Button _buttonVolumeCancel;
     private Button _buttonVolumeLoad;
+    private Button _buttonFolderOpen;
+    private Button _buttonFolderLoad;
+    private Button _buttonFolderCancel;
     private Button _buttonLanguage;
 
     public static Action<float> VolumeAlphaChanged;
@@ -50,6 +56,7 @@ public class Menu : MonoBehaviour
     {
         _uiDocument = GetComponent<UIDocument>();
         _volumeArchive = _uiDocument.rootVisualElement.Q<VisualElement>("VolumeArchive");
+        _volumeLoad = _uiDocument.rootVisualElement.Q<VisualElement>("VolumeLoad");
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
         _dropdownFieldMRIAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-MRIAxis");
         _dropdownFieldUSAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-USAxis");
@@ -61,6 +68,7 @@ public class Menu : MonoBehaviour
         _sliderVolumeAlphaThreshold = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeAlphaThreshold");
         _sliderVolumeStepSize = _uiDocument.rootVisualElement.Q<Slider>("Slider-VolumeStepSize");
         _radioButtonGroupVolumeArchive =  _uiDocument.rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroup-VolumeArchive");
+        _radioButtonGroupVolumeLoad =  _uiDocument.rootVisualElement.Q<RadioButtonGroup>("RadioButtonGroup-VolumeLoad");
         _brightnessSlider = _uiDocument.rootVisualElement.Q<MinMaxSlider>("BrightnessSlider");
         _modeButtonAtlas = _uiDocument.rootVisualElement.Q<Button>("Button-ModeAtlas");
         _modeButtonCT = _uiDocument.rootVisualElement.Q<Button>("Button-ModeCT");
@@ -70,7 +78,11 @@ public class Menu : MonoBehaviour
         _buttonLanguage = _uiDocument.rootVisualElement.Q<Button>("Button-Language");
         _buttonVolumeArchive = _uiDocument.rootVisualElement.Q<Button>("Button-VolumeArchive");
         _buttonVolumeChoose =  _uiDocument.rootVisualElement.Q<Button>("Button-VolumeChoose");
+        _buttonVolumeCancel =  _uiDocument.rootVisualElement.Q<Button>("Button-VolumeCancel");
         _buttonVolumeLoad = _uiDocument.rootVisualElement.Q<Button>("Button-VolumeLoad");
+        _buttonFolderOpen = _uiDocument.rootVisualElement.Q<Button>("Button-FolderOpen");
+        _buttonFolderLoad = _uiDocument.rootVisualElement.Q<Button>("Button-FolderLoad");
+        _buttonFolderCancel = _uiDocument.rootVisualElement.Q<Button>("Button-FolderCancel");
         for (var i = 0; i < modes.Count; i++)
         {
             var mode = modes[i];
@@ -99,6 +111,9 @@ public class Menu : MonoBehaviour
         _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
         _buttonVolumeArchive.RegisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
         _buttonVolumeChoose.RegisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
+        _buttonVolumeCancel.RegisterCallback<ClickEvent>(OnButtonVolumeCancelClick);
+        _buttonVolumeLoad.RegisterCallback<ClickEvent>(OnButtonVolumeLoadClick);
+        _buttonFolderCancel.RegisterCallback<ClickEvent>(OnButtonFolderCancelClick);
         _dropdownFieldCTAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.RegisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -127,6 +142,8 @@ public class Menu : MonoBehaviour
         _buttonLanguage.UnregisterCallback<ClickEvent>(OnButtonLanguageClick);
         _buttonVolumeArchive.UnregisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
         _buttonVolumeChoose.UnregisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
+        _buttonVolumeCancel.UnregisterCallback<ClickEvent>(OnButtonVolumeCancelClick);
+        _buttonVolumeLoad.UnregisterCallback<ClickEvent>(OnButtonVolumeLoadClick);
         _dropdownFieldCTAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldMRIAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
         _dropdownFieldUSAxis.UnregisterValueChangedCallback(OnDropdownFieldAxisChange);
@@ -174,9 +191,19 @@ public class Menu : MonoBehaviour
         _volumeArchive.style.display = DisplayStyle.None;
     }
 
+    private void OnButtonVolumeCancelClick(ClickEvent evt)
+    {
+        _volumeArchive.style.display = DisplayStyle.None;
+    }
+    
     private void OnButtonVolumeLoadClick(ClickEvent evt)
     {
-        
+        _volumeLoad.style.display = DisplayStyle.Flex;
+    }
+    
+    private void OnButtonFolderCancelClick(ClickEvent evt)
+    {
+        _volumeLoad.style.display = DisplayStyle.None;
     }
     
     private void OnDropdownFieldAxisChange(ChangeEvent<string> evt)
