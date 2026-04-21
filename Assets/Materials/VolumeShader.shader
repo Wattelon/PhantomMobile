@@ -5,7 +5,7 @@ Shader "Custom/VolumeShader"
         [MainTexture] _BaseMap("Base Map", 3D) = "white" {}
         _Alpha ("Alpha", Range(0, 1)) = 1.0
         _AlphaThreshold ("Alpha Threshold", Range(0, 1)) = 0.1
-        _StepSize ("Step Size", Range(0.001, 0.01)) = 0.005
+        _StepSize ("Step Size", Range(0.005, 0.01)) = 0.005
     }
 
     SubShader
@@ -77,21 +77,20 @@ Shader "Custom/VolumeShader"
 
                 float4 accumulatedColor = 0;
                 float t = max(0, tNear);
-                int maxSteps = 1024;
+                const int maxSteps = 128;
 
                 for (int i = 1; i < maxSteps; i++)
                 {
                     float3 uv = camPosOS + t * rayDirOS + 0.5;
                     float4 sample = SAMPLE_TEXTURE3D(_BaseMap, sampler_BaseMap, uv);
 
-                    if (sample.a >= _AlphaThreshold)
-                    {
-                        sample.rgb = sample.a;
-                        sample.a *= _Alpha;
+                    float mask = step(_AlphaThreshold, sample.a);
+                    sample.a *= mask;
+                    sample.rgb = sample.a;
+                    sample.a *= _Alpha;
 
-                        accumulatedColor.rgb += (1.0 - accumulatedColor.a) * sample.rgb * sample.a;
-                        accumulatedColor.a += (1.0 - accumulatedColor.a) * sample.a;
-                    }
+                    accumulatedColor.rgb += (1.0 - accumulatedColor.a) * sample.rgb * sample.a;
+                    accumulatedColor.a += (1.0 - accumulatedColor.a) * sample.a;
                     
                     t += _StepSize;
                     if (t > tFar) break;
