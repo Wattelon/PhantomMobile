@@ -74,11 +74,13 @@ public class ImagingSlicer : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
+        }*/
+        if (moveAlongSpline)
+        {
+            _splineAnimate.NormalizedTime = (float)currentIndex / TextureDepth;
+            _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureDepth);
         }
-        if (moveAlongSpline) _splineAnimate.NormalizedTime = (float)currentIndex / TextureDepth;
-        else transform.localPosition = Vector3.forward * (currentIndex * step);*/
-        
-        switch (currentAxis)
+        else switch (currentAxis)
         {
             case Axis.Axial:
                 transform.localRotation = Quaternion.LookRotation(Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY), imagingSO.OrientationVectorY);

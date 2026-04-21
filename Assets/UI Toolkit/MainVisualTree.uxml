@@ -159,7 +159,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
                     <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Textures/Slice.png?fileID=2800000&amp;guid=377f503e0c5a09643825a05e4a3ebc85&amp;type=3#Slice&quot;); -unity-background-scale-mode: scale-to-fit; width: 15%;"/>
-                    <ui:Slider label="Slider" value="0" high-value="0.01" name="Slider-VolumeStepSize" show-input-field="true" low-value="0.001" style="flex-grow: 1;">
+                    <ui:Slider label="Slider" value="0.01" high-value="0.01" name="Slider-VolumeStepSize" show-input-field="true" low-value="0.005" style="flex-grow: 1;">
                         <Bindings>
                             <UnityEngine.Localization.LocalizedString property="label" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(28326065376817152)"/>
                         </Bindings>
