@@ -84,19 +84,19 @@ public class ImagingSlicer : MonoBehaviour
         {
             case Axis.Axial:
                 transform.localRotation = Quaternion.LookRotation(Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY), imagingSO.OrientationVectorY);
-                transform.localPosition = transform.forward * ((-0.5f * TextureDepth + currentIndex) * imagingSO.SpacingBetweenSlices / 1000);
+                transform.localPosition = transform.localRotation * Vector3.forward * ((-0.5f * TextureDepth + currentIndex) * imagingSO.SpacingBetweenSlices / 1000);
                 transform.localScale = new Vector3(imagingSO.PixelSpacingColumn * TextureWidth / 1000, imagingSO.PixelSpacingRow * TextureHeight / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureDepth);
                 break;
             case Axis.Sagittal:
                 transform.localRotation = Quaternion.LookRotation(imagingSO.OrientationVectorX, Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY));
-                transform.localPosition = transform.forward * ((-0.5f * TextureWidth + currentIndex) * imagingSO.PixelSpacingColumn / 1000);
+                transform.localPosition = transform.localRotation * Vector3.forward * ((-0.5f * TextureWidth + currentIndex) * imagingSO.PixelSpacingColumn / 1000);
                 transform.localScale = new Vector3(imagingSO.SpacingBetweenSlices * TextureDepth / 1000, imagingSO.PixelSpacingRow * TextureHeight / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureWidth);
                 break;
             case Axis.Coronal:
                 transform.localRotation = Quaternion.LookRotation(imagingSO.OrientationVectorY, Vector3.Cross(imagingSO.OrientationVectorX, imagingSO.OrientationVectorY));
-                transform.localPosition = transform.forward * ((-0.5f * TextureHeight + currentIndex) * imagingSO.PixelSpacingRow / 1000);
+                transform.localPosition = transform.localRotation * Vector3.forward * ((-0.5f * TextureHeight + currentIndex) * imagingSO.PixelSpacingRow / 1000);
                 transform.localScale = new Vector3(imagingSO.PixelSpacingColumn * TextureWidth / 1000, imagingSO.SpacingBetweenSlices * TextureDepth / 1000, 1);
                 _material.SetFloat(SlicePropertyID, (float)currentIndex / TextureHeight);
                 break;

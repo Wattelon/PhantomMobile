@@ -5,7 +5,6 @@ using UnityEngine;
 public class ImagingSO : ScriptableObject
 {
     [SerializeField] private Texture3D studyTexture;
-    [SerializeField] private byte[] pixels;
     [SerializeField] private int width;
     [SerializeField] private int height;
     [SerializeField] private int depth;
@@ -19,9 +18,10 @@ public class ImagingSO : ScriptableObject
     [SerializeField] private Vector3 orientationVectorX;
     [SerializeField] private Vector3 orientationVectorY;
     [SerializeField] private Vector3 scalingVector;
+
+    public byte[] Pixels { get; private set; }
     
     public Texture3D StudyTexture => studyTexture;
-    public byte[] Pixels => pixels;
     public int Width => width;
     public int Height => height;
     public int Depth => depth;
@@ -39,7 +39,7 @@ public class ImagingSO : ScriptableObject
     {
         this.seriesUID = seriesUID;
         this.studyTexture = studyTexture;
-        this.pixels = pixels;
+        Pixels = pixels;
         this.width = width;
         this.height = height;
         this.depth = depth;

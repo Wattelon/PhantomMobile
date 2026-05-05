@@ -178,14 +178,14 @@ public static class ImagingVolumetricGenerator
         
         var identifier = _isDateTimeMissing ? _seriesUID : $"{_instanceCreationDate}_{_instanceCreationTime}";
         var filename = $"{_modality}_{identifier}";
-        var json = JsonUtility.ToJson(imagingSO);
+        /*var json = JsonUtility.ToJson(imagingSO);
         json = JsonCompressor.Compress(json);
-        File.WriteAllText($"{Application.persistentDataPath}/{filename}.json", json);
+        File.WriteAllText($"{Application.persistentDataPath}/{filename}.json", json);*/
         
         if (!AssetDatabase.IsValidFolder("Assets/Imaging")) AssetDatabase.CreateFolder("Assets", "Imaging");
         if (!AssetDatabase.IsValidFolder($"Assets/Imaging/{_modality}")) AssetDatabase.CreateFolder("Assets/Imaging", _modality);
-        //AssetDatabase.CreateAsset(_studyTexture, $"Assets/Imaging/{_modality}/{filename}.asset");
-        //AssetDatabase.CreateAsset(imagingSO, $"Assets/Imaging/{_modality}/{filename}_SO.asset");
+        AssetDatabase.CreateAsset(_studyTexture, $"Assets/Imaging/{_modality}/{filename}.asset");
+        AssetDatabase.CreateAsset(imagingSO, $"Assets/Imaging/{_modality}/{filename}_SO.asset");
     }
 }
 #endif

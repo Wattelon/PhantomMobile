@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QCARConfig>
+    <Tracking>
+        <ModelTarget name="Torso" trackingMode="car" motionHint="static" upVector="1.0 0.0 0.0" optimizeTrackingFor="low_feature_objects"></ModelTarget>
+    </Tracking>
+    <Assembly name="Torso" assemblyId="103aab9936724621b2edf5fe31e72ce7">
+        <Part name="Torso" translation="0 0 0" rotation="AD: 0 0 1 0"></Part>
+        <EntryPoint name="(none)" trained="yes"></EntryPoint>
+    </Assembly>
+</QCARConfig>
