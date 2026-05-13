@@ -1,1 +1,51 @@
-Система распознает фантом щитовидной железы и предоставляет следующие виды визуализации —  анатомический атлас, наложение срезов компьютерной томографии, магнитно-резонансной томографии и ультразвукового исследования.
+# PhantomMobile – AR visualization for medical ultrasound phantoms
+
+[![Lab Website](https://img.shields.io/badge/MUSL-Lab_Website-blue)](https://drleonov.github.io)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Unity](https://img.shields.io/badge/Unity-2022.3+-black)](https://unity.com)
+
+**PhantomMobile** is an open‑source mobile augmented reality (AR) application developed by the [Moscow UltraSound Laboratory (MUSL)](https://drleonov.github.io). It enables real‑time visualization of multimodal medical images (CT, MRI, ultrasound) over physical anthropomorphic phantoms.
+
+<p align="center">
+  <img src="Docs/screenshot_demo.png" alt="PhantomMobile AR demo" width="300">
+  <br>
+  <em>Example: AR overlay on a thyroid phantom (screenshot placeholder – replace with actual image).</em>
+</p>
+
+## 🎯 Purpose
+
+- Provide an accessible AR tool for **medical education and radiology training**.
+- Support **multimodal image fusion** (anatomical atlas, CT/MRI/ ultrasound slices) on low‑cost Android devices.
+- Enable **reproducible research** in ultrasound phantoms and AR‑guided interventions.
+
+## ✨ Features
+
+- Recognises physical phantoms (thyroid, head, abdomen) via Vuforia / OpenXR.
+- Displays:
+  - 3D anatomical atlas overlay
+  - Real‑time alignment of CT, MRI, and ultrasound slices
+  - Multi‑planar reconstruction (axial, sagittal, coronal)
+- Supports DICOM series upload and synchronised cross‑hair navigation.
+- Built with **Unity 2022.3** and **OpenXR** for cross‑platform compatibility.
+
+## 🧪 Compatible phantoms
+
+- Anthropomorphic thyroid phantom (main test object)
+- Head phantom (transcranial ultrasound studies)
+- Abdominal phantom (liver / kidney training)
+
+> If you plan to use PhantomMobile with your own phantoms, please [contact us](mailto:leonovd.v@ya.ru) – we can help adapt the target recognition.
+
+## 📲 Getting started
+
+### Prerequisites
+
+- Unity 2022.3 (or newer) with Android Build Support
+- Android device (ARCore‑compatible recommended) or HoloLens 2
+- Git LFS (for large assets)
+
+### Build from source
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Wattelon/PhantomMobile.git
