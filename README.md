@@ -49,3 +49,33 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/Wattelon/PhantomMobile.git
+Open the project in Unity.
+
+Configure your Android/iOS/HoloLens settings.
+
+Build and run on your target device.
+
+Detailed build instructions will be added as the project matures. For now, feel free to experiment – and please open an issue if you encounter problems.
+
+📖 How to cite
+If you use PhantomMobile in your research, please cite the MosMedAR platform and the relevant MUSL publications:
+
+text
+MosMedAR Project Team (2026). MosMedAR: Augmented Reality for Medical Education and Imaging.
+Moscow UltraSound Laboratory. https://drleonov.github.io/ar/
+For scientific background, refer to our papers on anthropomorphic phantoms and AR navigation (see MUSL Publications).
+
+🤝 Contributing
+We welcome contributions! Feel free to:
+
+Report bugs or suggest features via GitHub Issues
+
+Submit pull requests for improvements or new features
+
+Please read our contribution guidelines (if you add one) before submitting.
+
+📜 License
+This project is licensed under the MIT License – see the LICENSE file for details.
+
+📬 Contact
+Laboratory website: https://drleonov.github.io
