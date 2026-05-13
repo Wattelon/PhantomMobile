@@ -6,11 +6,13 @@
 
 **PhantomMobile** is an open‑source mobile augmented reality (AR) application developed by the [Moscow UltraSound Laboratory (MUSL)](https://drleonov.github.io). It enables real‑time visualization of multimodal medical images (CT, MRI, ultrasound) over physical anthropomorphic phantoms.
 
+<!-- 
 <p align="center">
   <img src="Docs/screenshot_demo.png" alt="PhantomMobile AR demo" width="300">
   <br>
   <em>Example: AR overlay on a thyroid phantom (screenshot placeholder – replace with actual image).</em>
 </p>
+ -->
 
 ## 🎯 Purpose
 
