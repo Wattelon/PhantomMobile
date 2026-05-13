@@ -1,3 +1,8 @@
+⚠️ This project moved to https://github.com/moscow-ultrasound-lab/PhantomAR
+
+
+
+
 # PhantomMobile – AR visualization for medical ultrasound phantoms
 
 [![Lab Website](https://img.shields.io/badge/MUSL-Lab_Website-blue)](https://drleonov.github.io)
