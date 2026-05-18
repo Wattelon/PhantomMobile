@@ -1,0 +1,22 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="TestPanel" style="background-color: rgb(125, 121, 121); flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 0; flex-direction: row; height: auto; align-content: auto; justify-content: space-between; align-self: auto; background-color: rgba(125, 121, 121, 0); display: flex; font-size: 64px; padding-top: 10%; padding-right: 5%; padding-bottom: 0%; padding-left: 5%;">
+            <ui:Label text="Вопрос 1/10" name="QuestionCount"/>
+            <ui:Label text="0:00" name="Timer" style="align-self: flex-start;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%; justify-content: flex-end;">
+            <ui:VisualElement name="QuestionImage" style="background-image: url(&quot;project://database/Assets/Texture/Test_US_Thyroid.png?fileID=2800000&amp;guid=b9737493c7142554fb10661dec3b366d&amp;type=3#Test_US_Thyroid&quot;); -unity-background-scale-mode: scale-to-fit; flex-grow: 1;"/>
+            <ui:VisualElement name="ModeContainer" style="flex-direction: column;">
+                <ui:Label name="QuestionText" text="Текст вопроса" style="white-space: normal; font-size: 64px;"/>
+                <ui:TextField placeholder-text="Введите ответ..." name="AnswerField" style="font-size: 64px;"/>
+                <ui:Button text="Ответить" name="SubmitButton" style="font-size: 64px;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="ResultsPanel" style="display: none; background-color: rgb(101, 101, 101); -unity-text-align: upper-left; flex-grow: 1; justify-content: center; align-items: center;">
+        <ui:Label text="Результаты" name="ResultsText" style="font-size: 64px; flex-wrap: wrap; -unity-text-align: middle-center; white-space: normal;"/>
+        <ui:Label text="Результаты" name="ResultsLog" style="white-space: normal; font-size: 48px; display: none; -unity-text-align: middle-center;"/>
+        <ui:Button text="Результаты" name="Button-Results" style="font-size: 64px;"/>
+        <ui:Button text="На главный экран" name="Button-Return" style="display: none; font-size: 64px;"/>
+    </ui:VisualElement>
+</ui:UXML>
