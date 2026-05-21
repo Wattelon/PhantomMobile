@@ -107,6 +107,10 @@ MonoBehaviour:
     m_Key: VolumeLoad
     m_Metadata:
       m_Items: []
+  - m_Id: 56955263615987712
+    m_Key: Test
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
