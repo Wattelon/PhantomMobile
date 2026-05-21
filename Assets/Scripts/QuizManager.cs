@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class QuizManager : MonoBehaviour
@@ -17,6 +15,8 @@ public class QuizManager : MonoBehaviour
     private Button _returnButton;
     private Label _questionCount;
     private Label _timerLabel;
+    private VisualElement _main;
+    private VisualElement _testMode;
     private VisualElement _questionImage;
     private VisualElement _resultsPanel;
     private VisualElement _testPanel;
@@ -26,7 +26,7 @@ public class QuizManager : MonoBehaviour
     private int _currentQuestionIndex;
     private int _correctAnswers;
     private float _elapsedTime;
-    private bool _isTestActive = true;
+    private bool _isTestActive;
 
     private void Awake()
     {
@@ -36,23 +36,23 @@ public class QuizManager : MonoBehaviour
         _answerField    = root.Q<TextField>("AnswerField");
         _submitButton   = root.Q<Button>("SubmitButton");
         _resultsButton  = root.Q<Button>("Button-Results");
-        _returnButton  = root.Q<Button>("Button-Return");
+        _returnButton   = root.Q<Button>("Button-Return");
         _questionCount  = root.Q<Label>("QuestionCount");
         _timerLabel     = root.Q<Label>("Timer");
+        _main           = root.Q<VisualElement>("Main");
+        _testMode       = root.Q<VisualElement>("TestMode");
+        _questionImage  = root.Q<VisualElement>("QuestionImage");
         _questionImage  = root.Q<VisualElement>("QuestionImage");
         _resultsPanel   = root.Q<VisualElement>("ResultsPanel");
         _testPanel      = root.Q<VisualElement>("TestPanel");
         _resultsText    = root.Q<Label>("ResultsText");
-        _resultsLog    = root.Q<Label>("ResultsLog");
-    }
-
-    private void Start()
-    {
-        ShowQuestion();
+        _resultsLog     = root.Q<Label>("ResultsLog");
     }
 
     private void OnEnable()
     {
+        ShowQuestion();
+        _isTestActive = true;
         _submitButton.RegisterCallback<ClickEvent>(OnSubmitSubmitted);
         _resultsButton.RegisterCallback<ClickEvent>(OnResultsButtonClicked);
         _returnButton.RegisterCallback<ClickEvent>(OnReturnButtonClicked);
@@ -60,6 +60,10 @@ public class QuizManager : MonoBehaviour
 
     private void OnDisable()
     {
+        _isTestActive = false;
+        _currentQuestionIndex = 0;
+        _correctAnswers = 0;
+        _elapsedTime = 0;
         _submitButton.UnregisterCallback<ClickEvent>(OnSubmitSubmitted);
         _resultsButton.UnregisterCallback<ClickEvent>(OnResultsButtonClicked);
         _returnButton.UnregisterCallback<ClickEvent>(OnReturnButtonClicked);
@@ -143,6 +147,9 @@ public class QuizManager : MonoBehaviour
         _resultsText.style.display = DisplayStyle.Flex;
         _returnButton.style.display = DisplayStyle.None;
         _resultsButton.style.display = DisplayStyle.Flex;
-        SceneManager.LoadScene(0);
+        _testPanel.style.display = DisplayStyle.Flex;
+        _testMode.style.display = DisplayStyle.None;
+        _main.style.display = DisplayStyle.Flex;
+        enabled = false;
     }
 }

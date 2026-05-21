@@ -11,8 +11,11 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private List<ModeComponents> modes;
     [SerializeField] private List<Locale> locales;
+    [SerializeField] private QuizManager quizManager;
     
     private UIDocument _uiDocument;
+    private VisualElement _main;
+    private VisualElement _testMode;
     private VisualElement _volumeArchive;
     private VisualElement _volumeLoad;
     private DropdownField _dropdownFieldCTAxis;
@@ -46,6 +49,7 @@ public class Menu : MonoBehaviour
     private Button _buttonFolderLoad;
     private Button _buttonFolderCancel;
     private Button _buttonLanguage;
+    private Button _buttonTest;
 
     public static Action<float> VolumeAlphaChanged;
     public static Action<float> VolumeAlphaThresholdChanged;
@@ -55,6 +59,8 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         _uiDocument = GetComponent<UIDocument>();
+        _main = _uiDocument.rootVisualElement.Q<VisualElement>("Main");
+        _testMode = _uiDocument.rootVisualElement.Q<VisualElement>("TestMode");
         _volumeArchive = _uiDocument.rootVisualElement.Q<VisualElement>("VolumeArchive");
         _volumeLoad = _uiDocument.rootVisualElement.Q<VisualElement>("VolumeLoad");
         _dropdownFieldCTAxis = _uiDocument.rootVisualElement.Q<DropdownField>("DropdownField-CTAxis");
@@ -76,6 +82,7 @@ public class Menu : MonoBehaviour
         _modeButtonUS = _uiDocument.rootVisualElement.Q<Button>("Button-ModeUS");
         _modeButtonVolume = _uiDocument.rootVisualElement.Q<Button>("Button-ModeVolume");
         _buttonLanguage = _uiDocument.rootVisualElement.Q<Button>("Button-Language");
+        _buttonTest = _uiDocument.rootVisualElement.Q<Button>("Button-Test");
         _buttonVolumeArchive = _uiDocument.rootVisualElement.Q<Button>("Button-VolumeArchive");
         _buttonVolumeChoose =  _uiDocument.rootVisualElement.Q<Button>("Button-VolumeChoose");
         _buttonVolumeCancel =  _uiDocument.rootVisualElement.Q<Button>("Button-VolumeCancel");
@@ -109,6 +116,7 @@ public class Menu : MonoBehaviour
         _modeButtonUS.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.Ultrasound);
         _modeButtonVolume.RegisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick, ApplicationMode.VolumeRendering);
         _buttonLanguage.RegisterCallback<ClickEvent>(OnButtonLanguageClick);
+        _buttonTest.RegisterCallback<ClickEvent>(OnButtonTestClick);
         _buttonVolumeArchive.RegisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
         _buttonVolumeChoose.RegisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
         _buttonVolumeCancel.RegisterCallback<ClickEvent>(OnButtonVolumeCancelClick);
@@ -140,6 +148,7 @@ public class Menu : MonoBehaviour
         _modeButtonMRI.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _modeButtonUS.UnregisterCallback<ClickEvent, ApplicationMode>(OnModeButtonClick);
         _buttonLanguage.UnregisterCallback<ClickEvent>(OnButtonLanguageClick);
+        _buttonTest.UnregisterCallback<ClickEvent>(OnButtonTestClick);
         _buttonVolumeArchive.UnregisterCallback<ClickEvent>(OnButtonVolumeArchiveClick);
         _buttonVolumeChoose.UnregisterCallback<ClickEvent>(OnButtonVolumeChooseClick);
         _buttonVolumeCancel.UnregisterCallback<ClickEvent>(OnButtonVolumeCancelClick);
@@ -177,6 +186,13 @@ public class Menu : MonoBehaviour
         _dropdownFieldLanguage.SetEnabled(_dropdownFieldLanguage.style.visibility == Visibility.Visible);
     }
 
+    private void OnButtonTestClick(ClickEvent evt)
+    {
+        _main.style.display = DisplayStyle.None;
+        _testMode.style.display = DisplayStyle.Flex;
+        quizManager.enabled = true;
+    }
+    
     private void OnButtonVolumeArchiveClick(ClickEvent evt)
     {
         var files = Directory.GetFiles(Application.persistentDataPath, "*.json",  SearchOption.AllDirectories);
