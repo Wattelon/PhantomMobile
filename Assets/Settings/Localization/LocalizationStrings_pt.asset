@@ -110,6 +110,10 @@ MonoBehaviour:
     m_Localized: Carregar
     m_Metadata:
       m_Items: []
+  - m_Id: 56955263615987712
+    m_Localized: Teste
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
