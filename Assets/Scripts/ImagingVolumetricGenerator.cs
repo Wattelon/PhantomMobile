@@ -129,8 +129,8 @@ public static class ImagingVolumetricGenerator
         
         _pixelSpacingRow = (float)pixelSpacing[0];
         _pixelSpacingColumn = (float)pixelSpacing[1];
-        _orientationVectorX = new Vector3(-orientationMatrix[0],  -orientationMatrix[1], orientationMatrix[2]);
-        _orientationVectorY = new Vector3(-orientationMatrix[3],  -orientationMatrix[4], orientationMatrix[5]);
+        //_orientationVectorX = new Vector3(-orientationMatrix[0],  -orientationMatrix[1], orientationMatrix[2]);
+        //_orientationVectorY = new Vector3(-orientationMatrix[3],  -orientationMatrix[4], orientationMatrix[5]);
         _scalingVector = new Vector3(_width * _pixelSpacingColumn, _height * _pixelSpacingRow, _depth * _spacingBetweenSlices);
         _scalingVector /= Mathf.Max(_scalingVector.x, _scalingVector.y, _scalingVector.z);
     }
