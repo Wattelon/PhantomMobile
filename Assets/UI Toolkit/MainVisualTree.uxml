@@ -5,7 +5,11 @@
             <ui:Button text="🌏︎" name="Button-Language" emoji-fallback-support="true" style="aspect-ratio: 1; background-color: rgba(0, 0, 0, 0); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-background-image-tint-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);"/>
             <ui:DropdownField label="" choices="English,Русский,Português" index="0" name="DropdownField-Language" enabled="false" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 60%; visibility: hidden;"/>
             <ui:DropdownField label="" choices="Thyroid Gland,Torso" index="0" name="DropdownField-Model" enabled="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 40%; flex-grow: 1; display: none;"/>
-            <ui:Button text="Test" name="Button-Test" style="flex-grow: 1;"/>
+            <ui:Button text="Test" name="Button-Test" style="flex-grow: 1; display: flex;">
+                <Bindings>
+                    <UnityEngine.Localization.LocalizedString property="text" table="GUID:49afdb7372b5be94890aa1b8401bda99" entry="Id(56955263615987712)"/>
+                </Bindings>
+            </ui:Button>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; flex-direction: column-reverse;">
             <ui:VisualElement name="ModeContainer" style="flex-direction: row; padding-top: 25px;">
